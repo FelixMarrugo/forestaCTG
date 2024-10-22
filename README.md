@@ -1,5 +1,5 @@
 # ForestaCTG 
-Es un pructo software en construcción para la **gestion del inventario del recurso arboreo** de la ciudad de Cartagena y su **mantenimiento**.
+Es un producto software en construcción para la **gestión del inventario del recurso arboreo** de la ciudad de Cartagena y su **mantenimiento**.
 
 **Para del desarrollo de este software se esta utilizando las siguientes tecnologias**
 - **Backend** API REST: NestJS
