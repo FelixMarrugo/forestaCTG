@@ -1,6 +1,19 @@
+
 <app-menu></app-menu>
-<div class="container mx-auto px-4">
-  <router-outlet></router-outlet>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <router-outlet></router-outlet>
+  </ion-content>
 </div>
 
 <app-footer></app-footer>
