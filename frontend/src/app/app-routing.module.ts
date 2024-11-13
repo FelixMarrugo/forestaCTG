@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './domains/shared/components/layout/layout.component';
 import {UsersComponent} from './domains/users/page/users/users.component';
+import { NotFoundComponent } from './domains/info/page/not-found/not-found.component';
 const routes: Routes = [
-  
+
   {
     path: '',
     component: LayoutComponent,
@@ -23,6 +24,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  }
 ];
 
 @NgModule({
