@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLinkWithHref } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, RouterLinkWithHref],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
