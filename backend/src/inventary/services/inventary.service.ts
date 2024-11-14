@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { faker } from '@faker-js/faker';
 import { Tree } from '../entities/tree.entity';
+import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+import { find } from 'rxjs';
 
 @Injectable()
 export class InventaryService {
@@ -27,5 +29,35 @@ export class InventaryService {
         state: true,
       });
     }
+  }
+
+  update(id: number, body: UpdateTreeDto) {
+    const user = this.findOne(id);
+    const index = this.trees.findIndex((item) => item.id === id);
+    this.trees[index] = {
+      ...user,
+      ...body,
+    };
+    return this.trees[index];
+  }
+
+  disable(id: number) {
+    const tree = this.findOne(id);
+    tree.state = !tree.state;
+    return this.update(id, tree);
+  }
+
+  findOne(id: number) {
+    return this.trees.find((el) => {
+      return id == el.id;
+    });
+  }
+
+  create(body: CreateTreeDto) {
+    this.trees.push({
+      id: this.trees.length + 1,
+      ...body,
+    });
+    return body;
   }
 }
