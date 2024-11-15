@@ -14,7 +14,8 @@ export class UsersService {
   private apiUrl = environment.apiUrl;
   private complementUrl='/users';
   getUsers(){
-    console.log(this.apiUrl);
+    //console.log(this.apiUrl);
     return this.http.get<User[]>(`${this.apiUrl}`+this.complementUrl);
+    //return this.http.get<User[]>('http://localhost:8100/users');
   }
 }
