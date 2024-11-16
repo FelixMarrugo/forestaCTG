@@ -3,6 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './domains/shared/components/layout/layout.component';
 import {UsersComponent} from './domains/users/page/users/users.component';
 import { NotFoundComponent } from './domains/info/page/not-found/not-found.component';
+import { ListTreeComponent } from './domains/inventary/page/list-tree/list-tree.component';
+
 const routes: Routes = [
 
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent,
+      },
+      {
+        path: 'inventario',
+        component: ListTreeComponent,
       }
     ]
   },

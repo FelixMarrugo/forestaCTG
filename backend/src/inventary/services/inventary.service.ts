@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { faker } from '@faker-js/faker';
 import { Tree } from '../entities/tree.entity';
 import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
-import { find } from 'rxjs';
 
 @Injectable()
 export class InventaryService {
@@ -25,7 +24,8 @@ export class InventaryService {
         neighborhood: faker.location.country(),
         locality: faker.string.alphanumeric(),
         physicalDescription: faker.lorem.lines(),
-        photo: faker.system.filePath(),
+        //photo: faker.system.filePath(),
+        photo: faker.image.avatar(),
         state: true,
       });
     }

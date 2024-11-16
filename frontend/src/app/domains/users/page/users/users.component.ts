@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit{
   constructor() { }
   users= signal<User[]>([])
   private userService = inject(UsersService);
-  ngOnInit(): void {
+  ngOnInit(){
     this.userService.getUsers()
     .subscribe({
       next:(users) =>{
@@ -29,5 +29,4 @@ export class UsersComponent implements OnInit{
       }
     })
   }
-
 }

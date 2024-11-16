@@ -16,9 +16,7 @@ export class InventaryController {
 
   @Get()
   getAll() {
-    return {
-      arboles: this.inventaryServices.getAll(),
-    };
+    return this.inventaryServices.getAll();
   }
 
   @Get(':id')
