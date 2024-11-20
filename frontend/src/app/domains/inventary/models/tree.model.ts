@@ -7,5 +7,7 @@ export interface Tree{
   locality: string;
   physicalDescription: string;
   photo: string;
-  state: boolean;
+  state: string;
 }
+
+export interface CreateTreeDTO extends Omit<Tree, 'id'>{}

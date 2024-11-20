@@ -3,14 +3,14 @@ import { TreeService } from '../../services/tree.service';
 import { Tree } from '../../models/tree.model';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-
+import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-table',
   standalone: true,
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, RouterLinkWithHref],
 })
 export class TableComponent  implements OnInit {
 

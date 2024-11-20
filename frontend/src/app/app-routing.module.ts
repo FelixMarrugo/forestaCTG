@@ -4,6 +4,7 @@ import { LayoutComponent } from './domains/shared/components/layout/layout.compo
 import {UsersComponent} from './domains/users/page/users/users.component';
 import { NotFoundComponent } from './domains/info/page/not-found/not-found.component';
 import { ListTreeComponent } from './domains/inventary/page/list-tree/list-tree.component';
+import { AddTreeComponent } from './domains/inventary/page/add-tree/add-tree.component';
 
 const routes: Routes = [
 
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'inventario',
         component: ListTreeComponent,
+      },
+      {
+        path: 'addTree',
+        component: AddTreeComponent,
       }
     ]
   },
