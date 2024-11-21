@@ -23,7 +23,7 @@ export class FormTreeComponent{
     locality: new FormControl(''),
     physicalDescription: new FormControl(''),
     photo: new FormControl(''),
-    state: new FormControl(''),
+    state: new FormControl('true'),
   });
 
   createNewTree() {
