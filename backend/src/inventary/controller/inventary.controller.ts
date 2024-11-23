@@ -1,14 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  ParseIntPipe,
-  Param,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { InventaryService } from '../services/inventary.service';
-import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+//import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
 
 @Controller('inventary')
 export class InventaryController {
@@ -20,11 +12,11 @@ export class InventaryController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.inventaryServices.findOne(id);
   }
 
-  @Post()
+  /*@Post()
   create(@Body() body: CreateTreeDto) {
     return this.inventaryServices.create(body);
   }
@@ -40,5 +32,5 @@ export class InventaryController {
   @Put('disable/:id')
   disable(@Param('id', ParseIntPipe) id: number) {
     return this.inventaryServices.disable(id);
-  }
+  }*/
 }

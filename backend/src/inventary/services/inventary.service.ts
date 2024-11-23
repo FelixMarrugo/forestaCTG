@@ -1,37 +1,30 @@
 import { Injectable } from '@nestjs/common';
-import { faker } from '@faker-js/faker';
+//import { faker } from '@faker-js/faker';
 import { Tree } from '../entities/tree.entity';
-import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+
+//import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class InventaryService {
   private trees: Tree[] = [];
-  constructor() {
-    this.generateRandomTreeData();
-  }
+  constructor(@InjectModel(Tree.name) private treeModel: Model<Tree>) {}
 
   getAll() {
-    return this.trees;
+    return this.treeModel.find().exec();
   }
 
-  generateRandomTreeData() {
-    for (let i = 0; i < 20; i++) {
-      this.trees.push({
-        id: i + 1,
-        location: `${faker.location.latitude()} ${faker.location.longitude()}`,
-        commonName: faker.animal.dog(),
-        scientificName: faker.animal.insect(),
-        neighborhood: faker.location.country(),
-        locality: faker.string.alphanumeric(),
-        physicalDescription: faker.lorem.lines(),
-        //photo: faker.system.filePath(),
-        photo: faker.image.avatar(),
-        state: true,
-      });
+  async findOne(id: string) {
+    const tree = this.treeModel.findById(id);
+    if (!tree) {
+      throw new Error(`Tree with id ${id} not found`);
     }
+    return tree;
   }
 
-  update(id: number, body: UpdateTreeDto) {
+  /*
+  update(id: string, body: UpdateTreeDto) {
     const user = this.findOne(id);
     const index = this.trees.findIndex((item) => item.id === id);
     this.trees[index] = {
@@ -47,11 +40,7 @@ export class InventaryService {
     return this.update(id, tree);
   }
 
-  findOne(id: number) {
-    return this.trees.find((el) => {
-      return id == el.id;
-    });
-  }
+  
 
   create(body: CreateTreeDto) {
     this.trees.push({
@@ -59,5 +48,5 @@ export class InventaryService {
       ...body,
     });
     return body;
-  }
+  }*/
 }
