@@ -5,6 +5,7 @@ import { Tree } from '../entities/tree.entity';
 //import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { CreateTreeDto } from '../dtos/arbol.dto';
 
 @Injectable()
 export class InventaryService {
@@ -23,6 +24,11 @@ export class InventaryService {
     return tree;
   }
 
+  create(body: CreateTreeDto) {
+    const newTree = new this.treeModel(body);
+    console.log('Registro: ', newTree);
+    return newTree.save();
+  }
   /*
   update(id: string, body: UpdateTreeDto) {
     const user = this.findOne(id);
@@ -40,13 +46,6 @@ export class InventaryService {
     return this.update(id, tree);
   }
 
-  
 
-  create(body: CreateTreeDto) {
-    this.trees.push({
-      id: this.trees.length + 1,
-      ...body,
-    });
-    return body;
   }*/
 }

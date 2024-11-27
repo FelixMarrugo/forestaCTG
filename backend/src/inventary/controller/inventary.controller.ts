@@ -1,6 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { InventaryService } from '../services/inventary.service';
-//import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+import { CreateTreeDto } from '../dtos/arbol.dto';
 
 @Controller('inventary')
 export class InventaryController {
@@ -16,11 +16,12 @@ export class InventaryController {
     return this.inventaryServices.findOne(id);
   }
 
-  /*@Post()
+  @Post()
   create(@Body() body: CreateTreeDto) {
     return this.inventaryServices.create(body);
   }
 
+  /*
   @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,

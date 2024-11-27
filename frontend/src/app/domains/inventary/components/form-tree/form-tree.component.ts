@@ -12,6 +12,7 @@ import { CreateTreeDTO, Tree } from '../../models/tree.model';
 })
 export class FormTreeComponent{
   @Input() tree!: Tree;
+  @Input() title!: string;
   @Output() add = new EventEmitter();
 
   constructor() { }
@@ -38,5 +39,6 @@ export class FormTreeComponent{
       state: this.addTree.value.state ?? '',//+
     }
     this.add.emit(tree);
+    this.addTree.reset();
   }
 }
