@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { TreeService } from '../../services/tree.service';
 import { CreateTreeDTO } from '../../models/tree.model';
 import { FormTreeComponent } from '../../components/form-tree/form-tree.component';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-tree',
