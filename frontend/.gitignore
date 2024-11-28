@@ -70,3 +70,6 @@ testem.log
 Thumbs.db
 
 /mongo_data
+# Ignorar la carpeta node_modules
+/node_modules/
+/backend/mongo-data/
