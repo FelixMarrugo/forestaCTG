@@ -9,7 +9,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const corsOptions = {
     origin:
-      configService.get<string>('FRONTEND_ORIGIN') || 'http://localhost:8100',
+      configService.get<string>('FRONTEND_ORIGIN') || 'http://localhost:8101',
   };
   app.enableCors(corsOptions);
   app.useGlobalPipes(
