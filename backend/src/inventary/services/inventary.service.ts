@@ -40,8 +40,6 @@ export class InventaryService {
     return this.update(id, tree);
   }
 
-  
-
   create(body: CreateTreeDto) {
     this.trees.push({
       id: this.trees.length + 1,
