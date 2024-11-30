@@ -1,6 +1,14 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { InventaryService } from '../services/inventary.service';
-import { CreateTreeDto } from '../dtos/arbol.dto';
+import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
 
 @Controller('inventary')
 export class InventaryController {
@@ -21,17 +29,13 @@ export class InventaryController {
     return this.inventaryServices.create(body);
   }
 
-  /*
   @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() payload: UpdateTreeDto,
-  ) {
+  update(@Param('id') id: string, @Body() payload: UpdateTreeDto) {
     return this.inventaryServices.update(id, payload);
   }
 
   @Put('disable/:id')
-  disable(@Param('id', ParseIntPipe) id: number) {
+  disable(@Param('id') id: string) {
     return this.inventaryServices.disable(id);
-  }*/
+  }
 }
