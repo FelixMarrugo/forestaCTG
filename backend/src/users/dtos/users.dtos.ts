@@ -4,7 +4,7 @@ import { PartialType } from '@nestjs/mapped-types';
 export class CreateUserDto {
   @IsNotEmpty()
   @IsInt()
-  id: number;
+  id: string;
 
   @IsString()
   @IsNotEmpty()
