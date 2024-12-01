@@ -9,7 +9,7 @@ export class Maintenance extends Document {
   @Prop({ required: true })
   locality: string;
 
-  @Prop()
+  @Prop({ required: true })
   Description: string;
 
   @Prop({ required: true })
