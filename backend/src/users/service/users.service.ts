@@ -4,6 +4,7 @@ import { User } from './../entites/users.entity';
 import { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
 import { InjectModel } from '@nestjs/mongoose';
+
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}

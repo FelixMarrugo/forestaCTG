@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { InventaryService } from '../services/inventary.service';
-import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+import { CreateTreeDto, UpdateTreeDto } from '../dtos/tree.dto';
 
 @Controller('inventary')
 export class InventaryController {
