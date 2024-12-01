@@ -5,6 +5,7 @@ import {UsersComponent} from './domains/users/page/users/users.component';
 import { NotFoundComponent } from './domains/info/page/not-found/not-found.component';
 import { ListTreeComponent } from './domains/inventary/page/list-tree/list-tree.component';
 import { AddTreeComponent } from './domains/inventary/page/add-tree/add-tree.component';
+import { EditComponent } from './domains/inventary/page/edit/edit.component';
 
 const routes: Routes = [
 
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'addTree',
         component: AddTreeComponent,
+      },
+      {
+        path: 'editTree/:id',
+        component: EditComponent,
       }
     ]
   },
