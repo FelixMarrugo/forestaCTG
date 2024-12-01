@@ -7,7 +7,6 @@ import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class InventaryService {
-  private trees: Tree[] = [];
   constructor(@InjectModel(Tree.name) private treeModel: Model<Tree>) {}
 
   async getAll() {
