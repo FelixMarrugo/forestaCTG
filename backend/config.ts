@@ -11,6 +11,6 @@ export default registerAs('config', () => {
       connection: process.env.DB_CONNECTION || 'mongodb',
     },
     databaseUrl:
-      process.env.DATABASE_URL || 'mongodb://localhost:27017/forestaCTG',
+      process.env.DATABASE_URL || 'mongod b://localhost:27017/forestaCTG',
   };
 });
