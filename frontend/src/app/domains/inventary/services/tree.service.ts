@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Tree } from './../models/tree.model';
+import { Tree, UpdateTreeDTO,CreateTreeDTO } from './../models/tree.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CreateTreeDTO  } from './../models/tree.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +21,15 @@ export class TreeService {
 
   create(dto: CreateTreeDTO){
     return this.http.post<Tree>(`${this.apiUrl}`+this.complementUrl, dto);
+  }
+
+  update(id:string, dto: UpdateTreeDTO){
+    return this.http.put<UpdateTreeDTO>(`${this.apiUrl}${this.complementUrl}/${id}`, dto);
+  }
+
+  getOne(id: string){
+    console.log('Respuesta', this.http.get<Tree>(`${this.apiUrl}${this.complementUrl}/${id}`));
+    console.log('url: ', `${this.apiUrl}${this.complementUrl}/${id}`);
+    return this.http.get<Tree>(`${this.apiUrl}${this.complementUrl}/${id}`);
   }
 }
