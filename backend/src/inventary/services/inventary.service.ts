@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-//import { faker } from '@faker-js/faker';
 import { Tree } from '../entities/tree.entity';
-
-// import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
