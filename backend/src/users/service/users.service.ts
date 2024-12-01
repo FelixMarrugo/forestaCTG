@@ -2,16 +2,18 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { faker } from '@faker-js/faker';
 import { CreateUserDto, UpdateUserDto } from './../dtos/users.dtos';
 import { User } from './../entites/users.entity';
-
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class UsersService {
   private users: User[] = [];
   private counterId = 0;
-  constructor() {
+  constructor(private config: ConfigService) {
     this.generateUser();
   }
 
   getAll() {
+    const apiKey = this.config.get('API_KEY');
+    console.log(apiKey);
     return this.users;
   }
 

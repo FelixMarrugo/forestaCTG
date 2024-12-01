@@ -1,58 +1,60 @@
 import { Injectable } from '@nestjs/common';
-import { faker } from '@faker-js/faker';
+//import { faker } from '@faker-js/faker';
 import { Tree } from '../entities/tree.entity';
+
+// import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
-import { find } from 'rxjs';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class InventaryService {
   private trees: Tree[] = [];
-  constructor() {
-    this.generateRandomTreeData();
+  constructor(@InjectModel(Tree.name) private treeModel: Model<Tree>) {}
+
+  async getAll() {
+    return await this.treeModel.find();
   }
 
-  getAll() {
-    return this.trees;
-  }
-
-  generateRandomTreeData() {
-    for (let i = 0; i < 20; i++) {
-      this.trees.push({
-        id: i + 1,
-        location: `${faker.location.latitude()} ${faker.location.longitude()}`,
-        commonName: faker.animal.dog(),
-        scientificName: faker.animal.insect(),
-        neighborhood: faker.location.country(),
-        locality: faker.string.alphanumeric(),
-        physicalDescription: faker.lorem.lines(),
-        photo: faker.system.filePath(),
-        state: true,
-      });
+  async findOne(id: string) {
+    const tree = await this.treeModel.findById(id);
+    if (!tree) {
+      throw new Error(`Tree with id ${id} not found`);
     }
+    return tree;
   }
 
-  update(id: number, body: UpdateTreeDto) {
-    const user = this.findOne(id);
-    const index = this.trees.findIndex((item) => item.id === id);
-    this.trees[index] = {
-      ...user,
-      ...body,
-    };
-    return this.trees[index];
+  async create(body: CreateTreeDto) {
+    const newTree = await this.treeModel.insertMany([body]);
+    return newTree;
   }
 
-  disable(id: number) {
-    const tree = this.findOne(id);
-    tree.state = !tree.state;
-    return this.update(id, tree);
+  async update(id: string, body: UpdateTreeDto) {
+    await this.treeModel.updateOne({ _id: new ObjectId(id) }, { $set: body });
+    return await this.treeModel.findById(id);
+    // const tree = this.findOne(id);
+    // const index = this.trees.findIndex((item) => item.id === id);
+    // this.trees[index] = {
+    //   ...tree,
+    //   ...body,
+    // };
+    // return this.trees[index];
   }
 
-  findOne(id: number) {
-    return this.trees.find((el) => {
-      return id == el.id;
-    });
+  async disable(id: string) {
+    await this.treeModel.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { state: false } },
+    );
+    return await this.treeModel.findById(id);
+    // retu
+    // const tree = this.findOne(id);
+    // tree.state = !tree.state;
+    // return this.update(id, tree);
   }
 
+  /*
   create(body: CreateTreeDto) {
     this.trees.push({
       id: this.trees.length + 1,
@@ -60,4 +62,5 @@ export class InventaryService {
     });
     return body;
   }
+    */
 }
