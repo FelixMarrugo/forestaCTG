@@ -15,9 +15,9 @@ import { FormTreeComponent } from '../../components/form-tree/form-tree.componen
 export class AddTreeComponent {
   private treeService = inject(TreeService);
 
-  constructor() {
-
-  }
+  title = "ADD TREE";
+  description = "Debe llenar todos los campos";
+  constructor() { }
 
   createNewTree(tree: CreateTreeDTO) {
     this.treeService.create(tree).subscribe((response) => {
