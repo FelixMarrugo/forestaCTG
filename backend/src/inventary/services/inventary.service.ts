@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Tree } from '../entities/tree.entity';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateTreeDto, UpdateTreeDto } from '../dtos/arbol.dto';
+import { CreateTreeDto, UpdateTreeDto } from '../dtos/tree.dto';
 import { ObjectId } from 'mongodb';
 
 @Injectable()
