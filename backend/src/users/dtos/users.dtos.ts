@@ -1,11 +1,7 @@
-import { IsString, IsNotEmpty, IsEmail, IsInt, IsUrl } from 'class-validator';
+import { IsString, IsNotEmpty, IsEmail, IsUrl } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateUserDto {
-  @IsNotEmpty()
-  @IsInt()
-  id: string;
-
   @IsString()
   @IsNotEmpty()
   username: string;

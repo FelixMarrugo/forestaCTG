@@ -22,7 +22,14 @@ export class UsersService {
   }
 
   async create(body: CreateUserDto) {
-    const newUser = await this.userModel.insertMany([body]);
+    const newUser = await this.userModel.insertMany([
+      {
+        username: 'usuario1',
+        email: 'usuario1@example.com',
+        avatar: 'https://example.com/avatar1.jpg',
+        password: 'password123',
+      },
+    ]);
     return newUser;
   }
 
@@ -35,7 +42,7 @@ export class UsersService {
     const user: User = await this.findOne(id);
     await this.userModel.deleteOne({ _id: new ObjectId(id) });
     return {
-      response: `User '${user.username}' has been deleted from database`,
+      deletedUser: user,
     };
   }
 }
