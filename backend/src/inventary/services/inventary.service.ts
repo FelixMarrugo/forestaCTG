@@ -9,8 +9,8 @@ import { ObjectId } from 'mongodb';
 export class InventaryService {
   constructor(@InjectModel(Tree.name) private treeModel: Model<Tree>) {}
 
-  async getAll() {
-    return await this.treeModel.find();
+  getAll() {
+    return this.treeModel.find();
   }
 
   async findOne(id: string) {
@@ -22,6 +22,7 @@ export class InventaryService {
   }
 
   async create(body: CreateTreeDto) {
+    console.log('Creating', body);
     const newTree = await this.treeModel.insertMany([body]);
     return newTree;
   }
