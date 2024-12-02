@@ -1,7 +1,7 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      <app-form-tree [title]="title" [description]="description" [editTree]="tree"></app-form-tree>
+      <app-form-tree (add)="updateTree($event)" [title]="title" [description]="description" [editTree]="tree"></app-form-tree>
     </ion-col>
   </ion-row>
 </ion-grid>

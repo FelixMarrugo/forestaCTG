@@ -14,12 +14,13 @@ export class TreeService {
   private apiUrl = environment.apiUrl;
   private complementUrl='/inventary';
   getTrees(){
-    console.log(this.apiUrl);
+    console.log(`Url: ${this.apiUrl}${this.complementUrl}`);
     return this.http.get<Tree[]>(`${this.apiUrl}`+this.complementUrl);
-    //return this.http.get<User[]>('http://localhost:8100/users');
   }
 
   create(dto: CreateTreeDTO){
+    console.log('dto: ', dto);
+    console.log(this.http.post<Tree>(`${this.apiUrl}`+this.complementUrl, dto));
     return this.http.post<Tree>(`${this.apiUrl}`+this.complementUrl, dto);
   }
 
@@ -28,8 +29,6 @@ export class TreeService {
   }
 
   getOne(id: string){
-    console.log('Respuesta', this.http.get<Tree>(`${this.apiUrl}${this.complementUrl}/${id}`));
-    console.log('url: ', `${this.apiUrl}${this.complementUrl}/${id}`);
     return this.http.get<Tree>(`${this.apiUrl}${this.complementUrl}/${id}`);
   }
 }
