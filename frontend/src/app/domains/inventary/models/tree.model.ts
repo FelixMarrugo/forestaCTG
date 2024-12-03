@@ -1,5 +1,5 @@
 export interface Tree {
-  id: string;
+  _id: string;
   location: string;
   commonName: string;
   scientificName: string;
@@ -10,6 +10,6 @@ export interface Tree {
   state: string;
 }
 
-export interface CreateTreeDTO extends Omit<Tree, 'id'> {}
+export interface CreateTreeDTO extends Omit<Tree, '_id'> {}
 
 export interface UpdateTreeDTO extends Partial<CreateTreeDTO> {}
