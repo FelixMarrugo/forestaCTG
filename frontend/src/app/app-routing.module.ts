@@ -6,6 +6,7 @@ import { NotFoundComponent } from './domains/info/page/not-found/not-found.compo
 import { ListTreeComponent } from './domains/inventary/page/list-tree/list-tree.component';
 import { AddTreeComponent } from './domains/inventary/page/add-tree/add-tree.component';
 import { EditComponent } from './domains/inventary/page/edit/edit.component';
+import { MaintenanceComponent } from './domains/maintenance/page/maintenance/maintenance.component';
 
 const routes: Routes = [
 
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'editTree/:id',
         component: EditComponent,
+      },
+      {
+        path: 'maintenance',
+        component: MaintenanceComponent,
       }
     ]
   },
