@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsBoolean } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateTreeDto {
@@ -26,11 +26,11 @@ export class CreateTreeDto {
   @IsString()
   physicalDescription: string;
 
-  @IsNotEmpty()
   @IsString()
-  photo: string;
+  photo: string; // Usar siempre string
 
   @IsNotEmpty()
+  @IsBoolean()
   state: boolean;
 }
 

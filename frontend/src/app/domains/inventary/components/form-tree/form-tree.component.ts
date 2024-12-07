@@ -26,9 +26,11 @@ export class FormTreeComponent implements OnInit, OnChanges {
     neighborhood: new FormControl(''),
     locality: new FormControl(''),
     physicalDescription: new FormControl(''),
-    photo: new FormControl(''),
-    state: new FormControl('true'),
+    photo: new FormControl(''), // Aquí puede ser string o File
+    state: new FormControl(true), // Cambiado a boolean
   });
+
+  selectedFile: File | string = '';
 
   constructor() {}
 
@@ -40,8 +42,25 @@ export class FormTreeComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['editTree'] && this.addTree) {
-      this.addTree.patchValue(this.editTree);
+      // Convertir el archivo a string para compatibilidad
+      if (this.editTree.photo) {
+        this.addTree.patchValue({
+          ...this.editTree,
+          photo: typeof this.editTree.photo === 'string' ? this.editTree.photo : ''
+        });
+      } else {
+        this.addTree.patchValue(this.editTree);
+      }
+      // Asegurar que el estado es booleano
+      this.addTree.patchValue({
+        ...this.editTree,
+        state: this.editTree.state
+      });
     }
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 
   createNewTree() {
@@ -52,24 +71,11 @@ export class FormTreeComponent implements OnInit, OnChanges {
       neighborhood: this.addTree.value.neighborhood ?? '',
       locality: this.addTree.value.locality ?? '',
       physicalDescription: this.addTree.value.physicalDescription ?? '',
-      photo: this.addTree.value.photo ?? '',
-      state: this.addTree.value.state ?? '',
+      photo: this.selectedFile, // Se envía el archivo en lugar de la URL
+      state: this.addTree.value.state ?? true, // Asegúrate de que es boolean
     };
+    console.log('createNewTree: ', tree); // Log para verificación
     this.add.emit(tree);
     this.addTree.reset();
-  }
-
-  updateTree() {
-    const tree: CreateTreeDTO = {
-      location: this.addTree.value.location ?? '',
-      commonName: this.addTree.value.commonName ?? '',
-      scientificName: this.addTree.value.scientificName ?? '',
-      neighborhood: this.addTree.value.neighborhood ?? '',
-      locality: this.addTree.value.locality ?? '',
-      physicalDescription: this.addTree.value.physicalDescription ?? '',
-      photo: this.addTree.value.photo ?? '',
-      state: this.addTree.value.state ?? '',
-    };
-    this.edit.emit(tree);
   }
 }

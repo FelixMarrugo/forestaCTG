@@ -18,13 +18,38 @@ export class AddTreeComponent {
 
   title = 'ADD TREE';
   description = 'Debe llenar todos los campos';
+
   constructor(
     private router: Router,
     private alertController: AlertController
   ) {}
 
   async createNewTree(tree: CreateTreeDTO) {
-    this.treeService.create(tree).subscribe({
+    console.log('createNewTree: ', tree); // Verificación de entrada
+
+    const formData = new FormData();
+    formData.append('location', tree.location);
+    console.log('location', tree.location); // Verificación de datos
+    formData.append('commonName', tree.commonName);
+    formData.append('scientificName', tree.scientificName);
+    formData.append('neighborhood', tree.neighborhood);
+    formData.append('locality', tree.locality);
+    formData.append('physicalDescription', tree.physicalDescription);
+    formData.append('state', tree.state.toString()); // Convertir el estado a string
+
+    if (tree.photo instanceof File) {
+      formData.append('photo', tree.photo); // Añade el archivo al formulario
+      console.log('Tiene un archivo', tree.photo);
+    } else {
+      formData.append('photo', ''); // Si no es un archivo, deja el campo vacío
+    }
+
+    // Verificar el contenido del FormData
+    formData.forEach((value, key) => {
+      console.log(key + ': ' + value);
+    });
+
+    this.treeService.create(formData).subscribe({
       next: async (response) => {
         console.log('Created: ', response);
         const successAlert = await this.alertController.create({
@@ -45,8 +70,7 @@ export class AddTreeComponent {
         console.error('Error creating: ', error);
         const errorAlert = await this.alertController.create({
           header: 'Error',
-          message:
-            'Ocurrió un error al crear el árbol. Por favor, intenta de nuevo.',
+          message: 'Ocurrió un error al crear el árbol. Por favor, intenta de nuevo.',
           buttons: ['OK'],
         });
         await errorAlert.present();

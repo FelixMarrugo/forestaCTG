@@ -1,6 +1,16 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { InventaryService } from '../services/inventary.service';
 import { CreateTreeDto, UpdateTreeDto } from '../dtos/tree.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('inventary')
 export class InventaryController {
@@ -17,8 +27,13 @@ export class InventaryController {
   }
 
   @Post()
-  create(@Body() body: CreateTreeDto) {
-    return this.inventaryServices.create(body);
+  @UseInterceptors(FileInterceptor('photo'))
+  create(
+    @Body() body: CreateTreeDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    console.log('File received: ', file);
+    return this.inventaryServices.create(body, file);
   }
 
   @Put(':id')

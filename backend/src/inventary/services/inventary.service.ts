@@ -4,9 +4,19 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateTreeDto, UpdateTreeDto } from '../dtos/tree.dto';
 import { ObjectId } from 'mongodb';
+import { S3 } from '@aws-sdk/client-s3';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class InventaryService {
+  private s3 = new S3({
+    region: 'us-east-2',
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+  });
+
   constructor(@InjectModel(Tree.name) private treeModel: Model<Tree>) {}
 
   getAll() {
@@ -21,8 +31,20 @@ export class InventaryService {
     return tree;
   }
 
-  async create(body: CreateTreeDto) {
-    console.log('Creating', body);
+  async create(body: CreateTreeDto, file: Express.Multer.File) {
+    const bucketName = 'filesstoragesforforestactg2024';
+    const key = `${uuidv4()}-${file.originalname}`;
+
+    await this.s3.putObject({
+      Bucket: bucketName,
+      Key: key,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+    });
+
+    const url = `https://${bucketName}.s3.amazonaws.com/${key}`;
+    body.photo = url;
+
     const newTree = await this.treeModel.insertMany([body]);
     return newTree;
   }
