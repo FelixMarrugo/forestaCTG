@@ -24,7 +24,7 @@ export class FormTreeComponent implements OnInit, OnChanges {
     commonName: new FormControl(''),
     scientificName: new FormControl(''),
     neighborhood: new FormControl(''),
-    locality: new FormControl(''),
+    locality: new FormControl('1'),
     physicalDescription: new FormControl(''),
     photo: new FormControl(''),
     state: new FormControl('true'),
