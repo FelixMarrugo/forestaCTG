@@ -7,10 +7,10 @@ export class Maintenance extends Document {
   date: Date;
 
   @Prop({ required: true })
-  locality: string;
+  neighborhood: string;
 
   @Prop({ required: true })
-  Description: string;
+  description: string;
 
   @Prop({ required: true })
   state: boolean;

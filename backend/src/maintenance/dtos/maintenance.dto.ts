@@ -8,11 +8,11 @@ export class CreateMaintenanceDto {
 
   @IsNotEmpty()
   @IsString()
-  locality: string;
+  neighborhood: string;
 
   @IsNotEmpty()
   @IsString()
-  Description: string;
+  description: string;
 
   @IsNotEmpty()
   @IsBoolean()

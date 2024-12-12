@@ -1,17 +1,30 @@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Component, EventEmitter, Input, OnInit, OnChanges, SimpleChanges, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  Inject,
+  inject,
+} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CreateTreeDTO, Tree } from '../../models/tree.model';
+import { LbService } from 'src/app/domains/shared/services/lb.service';
 
 @Component({
   selector: 'app-form-tree',
   standalone: true,
   templateUrl: './form-tree.component.html',
   styleUrls: ['./form-tree.component.scss'],
-  imports: [IonicModule, CommonModule, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
 export class FormTreeComponent implements OnInit, OnChanges {
+  private lbService = inject(LbService);
+
   @Input() tree!: Tree;
   @Input() title!: string;
   @Input() description!: string;
@@ -24,13 +37,26 @@ export class FormTreeComponent implements OnInit, OnChanges {
     commonName: new FormControl(''),
     scientificName: new FormControl(''),
     neighborhood: new FormControl(''),
-    locality: new FormControl('1'),
+    locality: new FormControl(''),
     physicalDescription: new FormControl(''),
     photo: new FormControl(''),
     state: new FormControl('true'),
   });
 
-  constructor() {}
+  constructor() {
+    this.setBarrios();
+    console.log('Barrios: ',this.barrios);
+  }
+
+
+  barrios:string[] = [];
+  LB = this.lbService.lb();
+
+    setBarrios() {
+      this.barrios = (this.lbService.setBarrios());
+    }
+
+
 
   ngOnInit() {
     if (this.editTree) {
@@ -71,5 +97,24 @@ export class FormTreeComponent implements OnInit, OnChanges {
       state: this.addTree.value.state ?? '',
     };
     this.edit.emit(tree);
+  }
+
+  localidad: string = '';
+  SetLocality(event: Event): void {
+    console.log('Event: ', event);
+    console.log('barrio: addtree: ', this.addTree.value.locality);
+    const barrioIndicado = (event.target as HTMLInputElement).value;
+    console.log('barrioIndicado: ', barrioIndicado);
+    for (let [localidad, barrios] of this.LB) {
+      if (barrios.includes(barrioIndicado)) {
+        console.log('La localidad es', localidad);
+        this.localidad = localidad as string;
+        this.addTree.controls['locality'].setValue(localidad.toString());
+        break;
+      } else {
+        console.log('Barrio no encontrado.');
+        this.localidad = '';
+      }
+    }
   }
 }
