@@ -29,9 +29,7 @@ export class MaintenanceService {
     }
 
     getFilterNeiborhood(barrio: string){
-      const complement = '/inventary/filter';
-      return this.http.post<CreateMaintenanceDTO>(`${this.apiUrl}`+complement, {neiborhood: barrio});
+      const complement = '/inventary/filter/';
+      return this.http.post(`${this.apiUrl}`+complement, {neighborhood: barrio});
     }
-
-
 }

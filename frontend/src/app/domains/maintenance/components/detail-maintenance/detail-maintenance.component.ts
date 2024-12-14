@@ -45,9 +45,8 @@ export class DetailMaintenanceComponent implements OnInit {
 
   }
   getFilterNeiborhood() {
-    console.log('neighborhood: ', this.maintenance());
-    this.maintenanceService
-      .getFilterNeiborhood(this.maintenance()!.neighborhood)
+    console.log('neighborhood: ', this.maintenance()!.neighborhood);
+    this.maintenanceService.getFilterNeiborhood(this.maintenance()!.neighborhood)
       .subscribe({
         next: async (response) => {
           console.log('Filtro: ', response);
