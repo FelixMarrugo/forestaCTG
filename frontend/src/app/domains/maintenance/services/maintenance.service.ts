@@ -23,4 +23,15 @@ export class MaintenanceService {
       console.log(`Url: ${this.apiUrl}${this.complementUrl}`);
       return this.http.get<Maintenance[]>(`${this.apiUrl}`+this.complementUrl);
     }
+
+    getOne(id: string){
+      return this.http.get<Maintenance>(`${this.apiUrl}${this.complementUrl}/${id}`);
+    }
+
+    getFilterNeiborhood(barrio: string){
+      const complement = '/inventary/filter';
+      return this.http.post<CreateMaintenanceDTO>(`${this.apiUrl}`+complement, {neiborhood: barrio});
+    }
+
+
 }
