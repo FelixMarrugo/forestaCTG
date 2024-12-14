@@ -1,18 +1,20 @@
-<ion-content class="ion-padding">
-  <ion-button expand="block" (click)="setOpen(true)">Open</ion-button>
+
+  <ion-button expand="block" (click)="setOpen(true)">Programar</ion-button>
+  <!--<button (click)="setOpen(true)">Programar</button>-->
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Modal</ion-title>
+          <ion-title>Programar</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="setOpen(false)">Close</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
+      <ion-content>
         <app-form (maintenanceEmit)="createMaintenance($event)" [title]="title_schedule" [decription]="description_schedule"></app-form>
       </ion-content>
     </ng-template>
   </ion-modal>
-</ion-content>
+
+

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateMaintenanceDTO } from '../models/maintenance.model';
+import { CreateMaintenanceDTO, Maintenance } from '../models/maintenance.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +19,8 @@ export class MaintenanceService {
     console.log(this.http.post<CreateMaintenanceDTO>(`${this.apiUrl}`+this.complementUrl, dto));
     return this.http.post<CreateMaintenanceDTO>(`${this.apiUrl}`+this.complementUrl, dto);
   }
+   get(){
+      console.log(`Url: ${this.apiUrl}${this.complementUrl}`);
+      return this.http.get<Maintenance[]>(`${this.apiUrl}`+this.complementUrl);
+    }
 }

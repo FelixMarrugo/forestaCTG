@@ -7,6 +7,7 @@ import { ListTreeComponent } from './domains/inventary/page/list-tree/list-tree.
 import { AddTreeComponent } from './domains/inventary/page/add-tree/add-tree.component';
 import { EditComponent } from './domains/inventary/page/edit/edit.component';
 import { MaintenanceComponent } from './domains/maintenance/page/maintenance/maintenance.component';
+import { DetailMaintenanceComponent } from './domains/maintenance/components/detail-maintenance/detail-maintenance.component';
 
 const routes: Routes = [
 
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'maintenance',
         component: MaintenanceComponent,
+      },
+      {
+        path: 'maintenance/detail/:id',
+        component: DetailMaintenanceComponent,
       }
     ]
   },

@@ -1,9 +1,26 @@
-<ion-card color="success">
-  <ion-card-header>
-    <ion-card-title>Card Title</ion-card-title>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-  </ion-card-header>
-  <ion-card-content> Card Content </ion-card-content>
-</ion-card>
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col>
+      <ion-card color="success">
+        <ion-card-header>
+          <ion-card-title>Card Title</ion-card-title>
+          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content> Card Content </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 
-<app-add-maintenance></app-add-maintenance>
+  <ion-row>
+    <ion-col>
+        <app-add-maintenance (getMaintenance)="get()"></app-add-maintenance>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngFor="let item of maintenance()">
+    <ion-col >
+      <app-card-maintenance [_id]="item._id" [date]="item.date" [description]="item.description" [neighborhood]="item.neighborhood" [state]="item.state"></app-card-maintenance>
+    </ion-col>
+
+  </ion-row>
+</ion-content>
