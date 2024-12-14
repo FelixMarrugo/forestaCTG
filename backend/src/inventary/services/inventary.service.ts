@@ -9,8 +9,8 @@ import { ObjectId } from 'mongodb';
 export class InventaryService {
   constructor(@InjectModel(Tree.name) private treeModel: Model<Tree>) {}
 
-  getAll() {
-    return this.treeModel.find();
+  getAll(filter: {}) {
+    return this.treeModel.find(filter);
   }
 
   async findOne(id: string) {
