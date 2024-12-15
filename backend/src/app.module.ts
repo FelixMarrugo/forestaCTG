@@ -8,7 +8,10 @@ import { InventaryModule } from './inventary/inventary.module';
 import { DatabaseModule } from './database/database.module';
 import { environment } from 'enviroments';
 import { MaintenanceModule } from './maintenance/maintenance.module';
+import { ScheduledMaintenanceController } from './scheduled-maintenance/controller/scheduled-maintenance.controller';
+import { ScheduledMaintenanceService } from './scheduled-maintenance/services/scheduled-maintenance.service';
 import config from 'config';
+import { ScheduledMaintenanceModule } from './scheduled-maintenance/scheduled-maintenance.module';
 
 @Module({
   imports: [
@@ -29,8 +32,9 @@ import config from 'config';
     }),
     DatabaseModule,
     MaintenanceModule,
+    ScheduledMaintenanceModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, ConfigService],
+  controllers: [AppController, ScheduledMaintenanceController],
+  providers: [AppService, ConfigService, ScheduledMaintenanceService],
 })
 export class AppModule {}
