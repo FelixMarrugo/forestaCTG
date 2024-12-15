@@ -1,3 +1,92 @@
-<p>
-  detail-maintenance works!
-</p>
+<ion-grid>
+  <ion-row>
+    <ion-col >
+      <ion-card color="primary">
+        <ion-card-header>
+          <ion-card-title>Detalle del mantenimineto</ion-card-title>
+          <ion-card-subtitle>Lista de todos los arboles</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-card color="primary">
+        <ion-card-header>
+          <ion-card-title>{{maintenance()?.neighborhood}}</ion-card-title>
+          <ion-card-subtitle>{{maintenance()?.date}}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>Description: {{maintenance()?.description}}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Lista de arboles</ion-card-title>
+          <ion-card-subtitle>{{maintenance()?.neighborhood}}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" class="px-6 py-3">
+                    Nombre común
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Nombre científico
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Ubicación
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Descrioción
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Status
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tree of tree()" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{tree.commonName}}
+                  </th>
+                  <td class="px-6 py-4">
+                    {{tree.scientificName}}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{tree.location}}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{tree.physicalDescription}}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{tree.state}}
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documentar
+                      mantenimineto</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

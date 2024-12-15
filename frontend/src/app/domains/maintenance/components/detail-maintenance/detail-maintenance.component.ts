@@ -6,6 +6,7 @@ import { TreeService } from 'src/app/domains/inventary/services/tree.service';
 import { MaintenanceService } from '../../services/maintenance.service';
 import { Maintenance } from '../../models/maintenance.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Tree } from 'src/app/domains/inventary/models/tree.model';
 @Component({
   selector: 'app-detail-maintenance',
   standalone: true,
@@ -21,6 +22,7 @@ export class DetailMaintenanceComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   maintenance = signal<Maintenance | null>(null);
+  tree = signal<Tree[] | null>([]);
   get() {
     this.maintenanceService.getOne(this.id).subscribe({
       next: (response) => {
@@ -50,6 +52,7 @@ export class DetailMaintenanceComponent implements OnInit {
       .subscribe({
         next: async (response) => {
           console.log('Filtro: ', response);
+          this.tree.set(response as Tree[]);
         },
         error: async (error) => {
           console.error('Error creating: ', error);

@@ -27,7 +27,6 @@ export class MaintenanceService {
     getOne(id: string){
       return this.http.get<Maintenance>(`${this.apiUrl}${this.complementUrl}/${id}`);
     }
-
     getFilterNeiborhood(barrio: string){
       const complement = '/inventary/filter/';
       return this.http.post(`${this.apiUrl}`+complement, {neighborhood: barrio});
