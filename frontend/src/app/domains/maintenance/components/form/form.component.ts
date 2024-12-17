@@ -45,6 +45,5 @@ export class FormComponent {
       this.maintenanceEmit.emit(this.maintenance.value);
     }
   }
-
   barrios: string[] = this.lbService.setBarrios();
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CreateMaintenanceDTO, Maintenance } from '../models/maintenance.model';
+import { CreateScheduledMaintenanceDTO, ScheduledMaintenance} from '../models/scheduledMaintenance.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,14 @@ export class MaintenanceService {
     getFilterNeiborhood(barrio: string){
       const complement = '/inventary/filter/';
       return this.http.post(`${this.apiUrl}`+complement, {neighborhood: barrio});
+    }
+
+    CreateScheduledMaintenance(body: CreateScheduledMaintenanceDTO){
+      const complement = '/scheduled-maintenance';
+      return this.http.post(`${this.apiUrl}`+complement, body);
+    }
+    getScheduledMaintenance(id: string){
+      const complement = '/scheduled-maintenance';
+      return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}`+complement+'/'+id);
     }
 }

@@ -1,6 +1,6 @@
 <ion-grid>
   <ion-row>
-    <ion-col >
+    <ion-col>
       <ion-card color="primary">
         <ion-card-header>
           <ion-card-title>Detalle del mantenimineto</ion-card-title>
@@ -76,10 +76,17 @@
                   <td class="px-6 py-4">
                     {{tree.state}}
                   </td>
-                  <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documentar
-                      mantenimineto</a>
+                  <td class="px-6 py-4" *ngIf="findTreeInSchedule(tree._id); else disable">
+                    <app-view-scheduled [idModal]="tree._id" [tree]="tree"
+                      [scheduled]="findTreeInSchedule(tree._id)"></app-view-scheduled>
                   </td>
+                  <ng-template #disable>
+                    <td class="px-6 py-4">
+                      <app-scheduled-maintenance [close]="closeModal"
+                        (ScheduledHandler)="createScheduledMaintenace($event)" [idMaintenance]="id"
+                        [tree]="tree"></app-scheduled-maintenance>
+                    </td>
+                  </ng-template>
                 </tr>
               </tbody>
             </table>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { Maintenance } from '../../models/maintenance.model';
 import { RouterLinkWithHref } from '@angular/router';
