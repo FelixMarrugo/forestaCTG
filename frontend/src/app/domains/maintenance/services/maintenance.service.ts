@@ -41,4 +41,8 @@ export class MaintenanceService {
       const complement = '/scheduled-maintenance';
       return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}`+complement+'/'+id);
     }
+    getScheduledAll(){
+      const complement = '/scheduled-maintenance';
+      return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}`+complement);
+    }
 }

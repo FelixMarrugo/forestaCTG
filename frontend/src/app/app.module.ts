@@ -7,17 +7,24 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { provideHttpClient} from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
+import { NgApexchartsModule } from "ng-apexcharts";
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    ReactiveFormsModule,
+    NgApexchartsModule
+  ],
   providers: [
     {
       provide: RouteReuseStrategy,
-      useClass: IonicRouteStrategy
+      useClass: IonicRouteStrategy,
     },
-    provideHttpClient()
+    provideHttpClient(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

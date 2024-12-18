@@ -1,3 +1,29 @@
-<p>
-  stadistic works!
-</p>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>
+          <h1>Estadisticas</h1>
+          <p>Este apartado esta diseñado para la generación de estadisticas sobre el recurso arboreo</p>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <app-tree-stadistics [countTree]="trees().length"></app-tree-stadistics>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <app-maintenance-staditics [countMaintenance]="maintenance().length"></app-maintenance-staditics>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <app-scheduleds-stadistics [countScheduled]="schedules().length"></app-scheduleds-stadistics>
+    </ion-col>
+  </ion-row>
+</ion-grid>
