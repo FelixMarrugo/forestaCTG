@@ -36,6 +36,7 @@ export class ScheduledMaintenanceService {
   }
 
   async update(id: string, body: UpdateScheduledMaintenanceDto) {
+    console.log('update', id, body);
     await this.scheduledMaintenanceModel.updateOne(
       { _id: new ObjectId(id) },
       { $set: body },

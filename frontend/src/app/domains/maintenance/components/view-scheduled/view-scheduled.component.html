@@ -22,12 +22,11 @@
             <ion-card-title>Descripción</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p>{{scheduled?.description}}</p>
 
-            <form  [formGroup]="scheduledMaintenanceEdit">
-              <textarea id="description" rows="4" formControlName="descripción"
+            <form  [formGroup]="scheduledMaintenanceEdit" (ngSubmit)="editScheduledMaintenance()">
+              <textarea id="description" rows="4"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Describir los hecho en el mantenimiento...">{{scheduled?.description}}</textarea>
+                placeholder="Describir los hecho en el mantenimiento..." formControlName="description">{{scheduled?.description}}</textarea>
 
                 <button><ion-button expand="block">Guardar</ion-button></button>
             </form>

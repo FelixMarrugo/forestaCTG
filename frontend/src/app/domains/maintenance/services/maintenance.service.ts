@@ -62,11 +62,12 @@ export class MaintenanceService {
     return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}` + complement);
   }
 
-  updateScheduledMaintenance(id: string, body: string) {
+  updateScheduledMaintenance(id: string | undefined, body: string) {
+    console.log('updateScheduledMaintenance');
     const complement = '/scheduled-maintenance';
     return this.http.put<ScheduledMaintenance>(
       `${this.apiUrl}` + complement + '/' + id,
-      body
+      {description: body}
     );
   }
 }
