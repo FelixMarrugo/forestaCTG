@@ -2,47 +2,71 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CreateMaintenanceDTO, Maintenance } from '../models/maintenance.model';
-import { CreateScheduledMaintenanceDTO, ScheduledMaintenance} from '../models/scheduledMaintenance.model';
+import {
+  CreateScheduledMaintenanceDTO,
+  ScheduledMaintenance,
+} from '../models/scheduledMaintenance.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MaintenanceService {
-
-  constructor() { }
+  constructor() {}
 
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
-  private complementUrl='/maintenance';
+  private complementUrl = '/maintenance';
 
-  create(dto: CreateMaintenanceDTO){
+  create(dto: CreateMaintenanceDTO) {
     console.log('dto: ', dto);
-    console.log(this.http.post<CreateMaintenanceDTO>(`${this.apiUrl}`+this.complementUrl, dto));
-    return this.http.post<CreateMaintenanceDTO>(`${this.apiUrl}`+this.complementUrl, dto);
+    console.log(
+      this.http.post<CreateMaintenanceDTO>(
+        `${this.apiUrl}` + this.complementUrl,
+        dto
+      )
+    );
+    return this.http.post<CreateMaintenanceDTO>(
+      `${this.apiUrl}` + this.complementUrl,
+      dto
+    );
   }
-   get(){
-      console.log(`Url: ${this.apiUrl}${this.complementUrl}`);
-      return this.http.get<Maintenance[]>(`${this.apiUrl}`+this.complementUrl);
-    }
+  get() {
+    console.log(`Url: ${this.apiUrl}${this.complementUrl}`);
+    return this.http.get<Maintenance[]>(`${this.apiUrl}` + this.complementUrl);
+  }
 
-    getOne(id: string){
-      return this.http.get<Maintenance>(`${this.apiUrl}${this.complementUrl}/${id}`);
-    }
-    getFilterNeiborhood(barrio: string){
-      const complement = '/inventary/filter/';
-      return this.http.post(`${this.apiUrl}`+complement, {neighborhood: barrio});
-    }
+  getOne(id: string) {
+    return this.http.get<Maintenance>(
+      `${this.apiUrl}${this.complementUrl}/${id}`
+    );
+  }
+  getFilterNeiborhood(barrio: string) {
+    const complement = '/inventary/filter/';
+    return this.http.post(`${this.apiUrl}` + complement, {
+      neighborhood: barrio,
+    });
+  }
 
-    CreateScheduledMaintenance(body: CreateScheduledMaintenanceDTO){
-      const complement = '/scheduled-maintenance';
-      return this.http.post(`${this.apiUrl}`+complement, body);
-    }
-    getScheduledMaintenance(id: string){
-      const complement = '/scheduled-maintenance';
-      return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}`+complement+'/'+id);
-    }
-    getScheduledAll(){
-      const complement = '/scheduled-maintenance';
-      return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}`+complement);
-    }
+  CreateScheduledMaintenance(body: CreateScheduledMaintenanceDTO) {
+    const complement = '/scheduled-maintenance';
+    return this.http.post(`${this.apiUrl}` + complement, body);
+  }
+  getScheduledMaintenance(id: string) {
+    const complement = '/scheduled-maintenance';
+    return this.http.get<ScheduledMaintenance[]>(
+      `${this.apiUrl}` + complement + '/' + id
+    );
+  }
+  getScheduledAll() {
+    const complement = '/scheduled-maintenance';
+    return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}` + complement);
+  }
+
+  updateScheduledMaintenance(id: string, body: string) {
+    const complement = '/scheduled-maintenance';
+    return this.http.put<ScheduledMaintenance>(
+      `${this.apiUrl}` + complement + '/' + id,
+      body
+    );
+  }
 }
