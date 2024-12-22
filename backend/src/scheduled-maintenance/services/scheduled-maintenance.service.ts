@@ -35,7 +35,6 @@ export class ScheduledMaintenanceService {
     return newScheduledMaintenance;
   }
 
-  // FALTA POR IMPLEMENTAR
   async update(id: string, body: UpdateScheduledMaintenanceDto) {
     await this.scheduledMaintenanceModel.updateOne(
       { _id: new ObjectId(id) },

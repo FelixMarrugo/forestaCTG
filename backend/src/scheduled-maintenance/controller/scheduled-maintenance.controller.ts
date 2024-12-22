@@ -1,6 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ScheduledMaintenanceService } from '../services/scheduled-maintenance.service';
-import { CreateScheduledMaintenanceDto } from '../dtos/scheduled-maintenance.dto';
+import {
+  CreateScheduledMaintenanceDto,
+  UpdateScheduledMaintenanceDto,
+} from '../dtos/scheduled-maintenance.dto';
 
 @Controller('scheduled-maintenance')
 export class ScheduledMaintenanceController {
@@ -21,5 +24,10 @@ export class ScheduledMaintenanceController {
   @Post()
   create(@Body() body: CreateScheduledMaintenanceDto) {
     return this.scheduledMaintenanceService.create(body);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() body: UpdateScheduledMaintenanceDto) {
+    return this.scheduledMaintenanceService.update(id, body);
   }
 }
