@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { StadisticComponent } from './stadistic.component';
+import StadisticComponent from './stadistic.component';
 
 describe('StadisticComponent', () => {
   let component: StadisticComponent;

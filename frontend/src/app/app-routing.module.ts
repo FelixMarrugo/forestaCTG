@@ -8,7 +8,7 @@ import { AddTreeComponent } from './domains/inventary/page/add-tree/add-tree.com
 import { EditComponent } from './domains/inventary/page/edit/edit.component';
 import { MaintenanceComponent } from './domains/maintenance/page/maintenance/maintenance.component';
 import { DetailMaintenanceComponent } from './domains/maintenance/components/detail-maintenance/detail-maintenance.component';
-import { StadisticComponent } from './domains/stadistics/page/stadistic/stadistic.component';
+import StadisticComponent from './domains/stadistics/page/stadistic/stadistic.component';
 
 const routes: Routes = [
 
