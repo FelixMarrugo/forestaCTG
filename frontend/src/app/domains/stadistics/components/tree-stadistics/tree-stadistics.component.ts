@@ -32,7 +32,7 @@ export class TreeStadisticsComponent implements AfterViewInit {
         labels: ['Arboles por localidad'],
         datasets: [
           {
-            data: [5],
+            data: [this.treeXlocality[0]],
             label: this.lbService.LB[0][0] as string,
             backgroundColor: ['rgba(255, 99, 132, 0.5)'],
             borderColor: ['rgba(255, 99, 132, 0.5)'],
@@ -41,7 +41,7 @@ export class TreeStadisticsComponent implements AfterViewInit {
             borderWidth: 1,
           },
           {
-            data: [3],
+            data: [this.treeXlocality[1]],
             label: this.lbService.LB[1][0] as string,
             backgroundColor: ['rgba(255, 205, 86, 0.5)'],
             borderColor: ['rgba(255, 205, 86, 0.5)'],
@@ -50,7 +50,7 @@ export class TreeStadisticsComponent implements AfterViewInit {
             borderWidth: 1,
           },
           {
-            data: [7],
+            data: [this.treeXlocality[2]],
             label: this.lbService.LB[2][0] as string,
             backgroundColor: ['rgba(153, 102, 255, 0.5)'],
             borderColor: ['rgba(153, 102, 255, 0.5)'],
