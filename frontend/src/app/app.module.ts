@@ -4,12 +4,11 @@ import { RouteReuseStrategy } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { NgChartsModule } from 'ng2-charts'; // Correct import statement//+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideHttpClient } from '@angular/common/http';
-
-import { NgApexchartsModule } from "ng-apexcharts";
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -17,7 +16,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    NgApexchartsModule
+    NgChartsModule
   ],
   providers: [
     {

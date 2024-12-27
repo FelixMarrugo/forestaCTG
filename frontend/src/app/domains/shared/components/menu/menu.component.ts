@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLinkWithHref } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { library, playCircle, radio, search } from 'ionicons/icons';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +12,8 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
-
-  constructor() { }
+  constructor() {
+    addIcons({ library, playCircle, radio, search });
+  }
 
 }

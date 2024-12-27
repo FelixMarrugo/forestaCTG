@@ -6,5 +6,11 @@
 
   <ion-card-content>
     <ion-card-title>{{countTree}} árboles</ion-card-title>
+
+    <div>
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+      [legend]="barChartLegend" [type]="'bar'">
+    </canvas>
+    </div>
   </ion-card-content>
 </ion-card>
