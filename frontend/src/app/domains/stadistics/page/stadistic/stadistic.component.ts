@@ -41,34 +41,11 @@ export default class StadisticComponent implements OnInit {
   schedules = signal<ScheduledMaintenance[]>([]);
   localities: any[] = [];
   treeXlocalities: number[] = [];
-  loc_1 = this.localities[0];
-  loc_2 = this.localities[1];
-  loc_3 = this.localities[2];
   ngOnInit() {
     this.getTree();
     this.getMaintenance();
     this.getScheduleds();
-
-
-    console.log('maintenance: ', this.maintenance());
-    console.log('schedules: ', this.schedules());
-    // this.getTree();
-    // this.getMaintenance();
-    // this.getScheduleds();
-    //this.filterTree();
   }
-
-  // getTree() {
-  //   this.treeService.getTrees().subscribe({
-  //     next: (response) => {
-  //       console.log('fetching trees: ', response);
-  //       this.trees.set(response);
-  //     },
-  //     error: (error) => {
-  //       console.error('Error fetching trees:', error);
-  //     }, // End of subscribe block
-  //   });
-  // }
 
   getMaintenance() {
     this.maintenanceService.get().subscribe({

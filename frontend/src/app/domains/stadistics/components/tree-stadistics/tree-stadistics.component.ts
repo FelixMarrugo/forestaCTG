@@ -21,6 +21,7 @@ export class TreeStadisticsComponent implements AfterViewInit {
   public barChartData!: ChartConfiguration<'bar'>['data'];
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: { display: true, text: 'Estadísticas de Árboles por Localidad' },
     },
