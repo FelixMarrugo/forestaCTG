@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, inject, Input, AfterViewInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ChartConfiguration } from 'chart.js';
@@ -13,9 +13,8 @@ import { LbService } from 'src/app/domains/shared/services/lb.service';
 })
 export class TreeStadisticsComponent implements AfterViewInit {
   @Input() treeXlocality: number[] = [];
-  @Input() loc_1!: number;
   private lbService = inject(LbService);
-  title = 'ng2-charts-demo';
+  title = 'Estadísticas de Árboles por Localidad';
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData!: ChartConfiguration<'bar'>['data'];
@@ -23,11 +22,17 @@ export class TreeStadisticsComponent implements AfterViewInit {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      title: { display: true, text: 'Estadísticas de Árboles por Localidad' },
+      title: { display: true, text: this.title },
     },
   };
   constructor() {}
   ngAfterViewInit() {
+    this.grafica();
+  }
+  counTree() {
+    return this.treeXlocality.reduce((a, b) => a + b);
+  }
+  grafica() {
     setTimeout(() => {
       this.barChartData = {
         labels: ['Arboles por localidad'],
@@ -63,8 +68,5 @@ export class TreeStadisticsComponent implements AfterViewInit {
       };
       console.log('treeXlocality: ', this.treeXlocality);
     }, 1000);
-  }
-  counTree() {
-    return this.treeXlocality.reduce((a, b) => a + b);
   }
 }

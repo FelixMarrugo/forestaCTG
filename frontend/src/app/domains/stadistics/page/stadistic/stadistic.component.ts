@@ -13,7 +13,7 @@ import { MaintenanceService } from 'src/app/domains/maintenance/services/mainten
 import { colorFill } from 'ionicons/icons';
 import { ScheduledMaintenance } from 'src/app/domains/maintenance/models/scheduledMaintenance.model';
 import { LbService } from 'src/app/domains/shared/services/lb.service';
-
+import { MenuService } from 'src/app/domains/shared/services/menu.service';
 @Component({
   selector: 'app-stadistic',
   standalone: true,
@@ -29,8 +29,9 @@ import { LbService } from 'src/app/domains/shared/services/lb.service';
 })
 export default class StadisticComponent implements OnInit {
   constructor() {
-
+    this.menuService.set(this.title)
   }
+  title = 'Estadisticas';
   private lbService = inject(LbService);
   private treeService = inject(TreeService);
   trees = signal<Tree[]>([]);
@@ -41,23 +42,31 @@ export default class StadisticComponent implements OnInit {
   schedules = signal<ScheduledMaintenance[]>([]);
   localities: any[] = [];
   treeXlocalities: number[] = [];
+
+  private menuService = inject(MenuService);
+
   ngOnInit() {
     this.getTree();
+    console.log('GetTree called');
     this.getMaintenance();
+    console.log('getMaintenance called');
     this.getScheduleds();
+    console.log('getScheduleds called');
+
   }
 
-  getMaintenance() {
-    this.maintenanceService.get().subscribe({
-      next: (response) => {
-        console.log('fetching Maintenance: ', response);
-        this.maintenance.set(response);
-      },
-      error: (error) => {
-        console.error('Error fetching trees:', error);
-      }, // End of subscribe block
-    });
-  }
+  //  getMaintenance() {
+  //      this.maintenanceService.get().subscribe({
+  //       next: (response) => {
+  //         console.log('fetching Maintenance: ', response);
+  //         this.maintenance.set(response);
+  //       },
+  //       error: (error) => {
+  //         console.error('Error fetching trees:', error);
+  //       }, // End of subscribe block
+  //     });
+  //   }
+
 
   getScheduleds() {
     this.maintenanceService.getScheduledAll().subscribe({
@@ -71,7 +80,6 @@ export default class StadisticComponent implements OnInit {
     });
   }
   filterTree() {
-
     this.lbService.LB.forEach((item) => {
       console.log('item: ', item[0]);
       let l = this.trees().filter((value) => {
@@ -94,10 +102,20 @@ export default class StadisticComponent implements OnInit {
     }
     this.filterTree();
   }
-  countTree(){
+  countTree() {
     this.treeXlocalities = this.localities.map((value) => {
       return value.length;
-    })
-    console.log('Localities map', this.localities)
+    });
+    console.log('Localities map', this.localities);
+  }
+
+  async getMaintenance() {
+    try {
+      const response = await firstValueFrom(this.maintenanceService.get());
+      console.log('fetching Maintenance:', response);
+      this.maintenance.set(response);
+    } catch (error) {
+      console.error('Error fetching Maintenance:', error);
+    }
   }
 }

@@ -5,7 +5,13 @@
   </ion-card-header>
 
   <ion-card-content>
-    <ion-card-title>{{countMaintenance}} mantenimientos</ion-card-title>
+    <ion-card-title> {{countMaintenance}} Mantenimientos</ion-card-title>
+    <div class="grafica">
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+        [legend]="barChartLegend" [type]="'bar'">
+      </canvas>
+    </div>
+
   </ion-card-content>
 </ion-card>
 
