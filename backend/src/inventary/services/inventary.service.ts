@@ -12,7 +12,13 @@ export class InventaryService {
   getAll(filter: {}) {
     return this.treeModel.find(filter);
   }
+  getFilterTrees(filter: { id: [string] }) {
+    const arr = filter.id.map((elem) => new ObjectId(elem));
 
+    return this.treeModel.find({
+      _id: { $in: arr },
+    });
+  }
   async findOne(id: string) {
     const tree = await this.treeModel.findById(id);
     if (!tree) {

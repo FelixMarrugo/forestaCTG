@@ -6,6 +6,7 @@ import {
   CreateScheduledMaintenanceDTO,
   ScheduledMaintenance,
 } from '../models/scheduledMaintenance.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class MaintenanceService {
       dto
     );
   }
-  get() {
+  get():Observable<any>{
     console.log(`Url: ${this.apiUrl}${this.complementUrl}`);
     return this.http.get<Maintenance[]>(`${this.apiUrl}` + this.complementUrl);
   }
@@ -57,7 +58,7 @@ export class MaintenanceService {
       `${this.apiUrl}` + complement + '/' + id
     );
   }
-  getScheduledAll() {
+  getScheduledAll():Observable<any> {
     const complement = '/scheduled-maintenance';
     return this.http.get<ScheduledMaintenance[]>(`${this.apiUrl}` + complement);
   }

@@ -31,7 +31,7 @@ export class MaintenanceComponent implements OnInit {
     get(){
       this.maintenanceService.get().subscribe({
         next: (response) => {
-          console.log('fetching trees: ', response);
+          console.log('fetching maintenance: ', response);
           this.maintenance.set(response);
         },
         error: (error) => {

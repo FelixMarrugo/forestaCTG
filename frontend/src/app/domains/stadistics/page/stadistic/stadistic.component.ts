@@ -39,20 +39,19 @@ export default class StadisticComponent implements OnInit {
   private maintenanceService = inject(MaintenanceService);
   maintenance = signal<Maintenance[]>([]);
 
-  schedules = signal<ScheduledMaintenance[]>([]);
+  schedules = signal<ScheduledMaintenance[] | any>([]) ;
   localities: any[] = [];
   treeXlocalities: number[] = [];
 
   private menuService = inject(MenuService);
 
-  ngOnInit() {
-    this.getTree();
-    console.log('GetTree called');
-    this.getMaintenance();
-    console.log('getMaintenance called');
-    this.getScheduleds();
-    console.log('getScheduleds called');
-
+  async ngOnInit() {
+    await this.getTree();
+    //console.log('GetTree called');
+    await this.getMaintenance();
+    //console.log('getMaintenance called');
+    await this.getScheduleds();
+    //console.log('getScheduleds called');
   }
 
   //  getMaintenance() {
@@ -68,22 +67,31 @@ export default class StadisticComponent implements OnInit {
   //   }
 
 
-  getScheduleds() {
-    this.maintenanceService.getScheduledAll().subscribe({
-      next: async (response) => {
+  // getScheduleds() {
+  //   this.maintenanceService.getScheduledAll().subscribe({
+  //     next: async (response) => {
+  //       console.log('Schedules: ', response);
+  //       this.schedules.set(response);
+  //     },
+  //     error: async (error) => {
+  //       console.error('Error creating: ', error);
+  //     },
+  //   });
+  // }
+  async getScheduleds() {
+    try {
+        const response = await this.maintenanceService.getScheduledAll().toPromise();
         console.log('Schedules: ', response);
         this.schedules.set(response);
-      },
-      error: async (error) => {
+    } catch (error) {
         console.error('Error creating: ', error);
-      },
-    });
-  }
-  filterTree() {
+    }
+}
+
+  async filterTree() {
     this.lbService.LB.forEach((item) => {
       console.log('item: ', item[0]);
       let l = this.trees().filter((value) => {
-        console.log('Value: ', value.locality);
         return value.locality == item[0];
       });
       this.localities.push(l);
@@ -94,7 +102,7 @@ export default class StadisticComponent implements OnInit {
 
   async getTree() {
     try {
-      const response = await firstValueFrom(this.treeService.getTrees());
+      const response = await this.treeService.getTrees().toPromise();
       console.log('fetching trees:', response);
       this.trees.set(response);
     } catch (error) {
@@ -111,7 +119,7 @@ export default class StadisticComponent implements OnInit {
 
   async getMaintenance() {
     try {
-      const response = await firstValueFrom(this.maintenanceService.get());
+      const response = await this.maintenanceService.get().toPromise();
       console.log('fetching Maintenance:', response);
       this.maintenance.set(response);
     } catch (error) {

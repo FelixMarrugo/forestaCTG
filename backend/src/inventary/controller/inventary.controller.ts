@@ -16,6 +16,11 @@ export class InventaryController {
     return this.inventaryServices.getAll(filter);
   }
 
+  @Post('filter/trees')
+  getTreesFilter(@Body() filter) {
+    return this.inventaryServices.getFilterTrees(filter);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.inventaryServices.findOne(id);
