@@ -4,21 +4,19 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateTreeDto, UpdateTreeDto } from '../dtos/tree.dto';
 import { ObjectId } from 'mongodb';
+import { S3Provider } from '../providers/s3/s3.provider';
 
 @Injectable()
 export class InventaryService {
-  constructor(@InjectModel(Tree.name) private treeModel: Model<Tree>) {}
+  constructor(
+    @InjectModel(Tree.name) private treeModel: Model<Tree>,
+    private s3Provider: S3Provider,
+  ) {}
 
-  getAll(filter: {}) {
-    return this.treeModel.find(filter);
+  async getAll(filter: {}) {
+    return await this.treeModel.find(filter);
   }
-  getFilterTrees(filter: { id: [string] }) {
-    const arr = filter.id.map((elem) => new ObjectId(elem));
 
-    return this.treeModel.find({
-      _id: { $in: arr },
-    });
-  }
   async findOne(id: string) {
     const tree = await this.treeModel.findById(id);
     if (!tree) {
@@ -28,8 +26,18 @@ export class InventaryService {
   }
 
   async create(body: CreateTreeDto) {
-    console.log('Creating', body);
-    const newTree = await this.treeModel.insertMany([body]);
+    const url = await this.s3Provider.uploadFile(body);
+    const tree = {
+      location: body.location,
+      commonName: body.commonName,
+      scientificName: body.scientificName,
+      neighborhood: body.neighborhood,
+      locality: body.locality,
+      physicalDescription: body.physicalDescription,
+      photo: url,
+      state: body.state,
+    };
+    const newTree = await this.treeModel.insertMany([tree]);
     return newTree;
   }
 
@@ -44,5 +52,13 @@ export class InventaryService {
       { $set: { state: false } },
     );
     return await this.treeModel.findById(id);
+  }
+
+  async getFilterTrees(filter: { id: [string] }) {
+    const arr = filter.id.map((elem) => new ObjectId(elem));
+
+    return await this.treeModel.find({
+      _id: { $in: arr },
+    });
   }
 }

@@ -7,37 +7,37 @@ export class InventaryController {
   constructor(private inventaryServices: InventaryService) {}
 
   @Get()
-  getAll() {
-    return this.inventaryServices.getAll({});
+  async getAll() {
+    return await this.inventaryServices.getAll({});
   }
 
   @Post('filter/')
-  getTreesWithFilter(@Body() filter) {
-    return this.inventaryServices.getAll(filter);
+  async getTreesWithFilter(@Body() filter) {
+    return await this.inventaryServices.getAll(filter);
   }
 
   @Post('filter/trees')
-  getTreesFilter(@Body() filter) {
-    return this.inventaryServices.getFilterTrees(filter);
+  async getTreesFilter(@Body() filter) {
+    return await this.inventaryServices.getFilterTrees(filter);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.inventaryServices.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return await this.inventaryServices.findOne(id);
   }
 
   @Post()
-  create(@Body() body: CreateTreeDto) {
-    return this.inventaryServices.create(body);
+  async create(@Body() body: CreateTreeDto) {
+    return await this.inventaryServices.create(body);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: UpdateTreeDto) {
-    return this.inventaryServices.update(id, payload);
+  async update(@Param('id') id: string, @Body() payload: UpdateTreeDto) {
+    return await this.inventaryServices.update(id, payload);
   }
 
   @Put('disable/:id')
-  disable(@Param('id') id: string) {
-    return this.inventaryServices.disable(id);
+  async disable(@Param('id') id: string) {
+    return await this.inventaryServices.disable(id);
   }
 }
