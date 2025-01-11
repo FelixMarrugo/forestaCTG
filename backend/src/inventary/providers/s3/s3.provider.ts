@@ -22,7 +22,7 @@ export class S3Provider {
 
     const params = {
       Bucket: process.env.S3_BUCKET_NAME,
-      Key: `/file/${imgName}`,
+      Key: `file/${imgName}`, 
       ACL: 'public-read',
       Body: decodedImage,
     };

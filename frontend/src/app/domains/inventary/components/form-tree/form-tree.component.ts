@@ -1,4 +1,9 @@
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  FormBuilder,
+} from '@angular/forms';
 import {
   Component,
   EventEmitter,
@@ -7,12 +12,11 @@ import {
   OnChanges,
   SimpleChanges,
   Output,
-  Inject,
   inject,
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { CreateTreeDTO, Tree } from '../../models/tree.model';
+import { CreateTreeDTO, Tree, UpdateTreeDTO } from '../../models/tree.model';
 import { LbService } from 'src/app/domains/shared/services/lb.service';
 
 @Component({
@@ -24,7 +28,9 @@ import { LbService } from 'src/app/domains/shared/services/lb.service';
 })
 export class FormTreeComponent implements OnInit, OnChanges {
   private lbService = inject(LbService);
-
+  file!: File;
+  filename!: string;
+  archivoBase64!: string | ArrayBuffer | null;
   @Input() tree!: Tree;
   @Input() title!: string;
   @Input() description!: string;
@@ -40,23 +46,38 @@ export class FormTreeComponent implements OnInit, OnChanges {
     locality: new FormControl(''),
     physicalDescription: new FormControl(''),
     photo: new FormControl(''),
-    state: new FormControl('true'),
+    state: new FormControl(true),
   });
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
     this.setBarrios();
-    console.log('Barrios: ',this.barrios);
+    console.log('Barrios: ', this.barrios);
+  }
+  handlerFile(event: any) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      this.filename = file.name;
+      if (file) {
+        // const archivoSeleccionado = file;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64String = reader.result as string;
+          this.archivoBase64 = base64String?.split(',')[1];
+          console.log('Archivo convertido a base64:', this.archivoBase64);
+        };
+        reader.readAsDataURL(file);
+        console.log('Target: ', file)
+      }
+    }
   }
 
-
-  barrios:string[] = [];
+  barrios: string[] = [];
   LB = this.lbService.lb();
 
-    setBarrios() {
-      this.barrios = (this.lbService.setBarrios());
-    }
-
-
+  setBarrios() {
+    this.barrios = this.lbService.setBarrios();
+  }
 
   ngOnInit() {
     if (this.editTree) {
@@ -71,6 +92,7 @@ export class FormTreeComponent implements OnInit, OnChanges {
   }
 
   createNewTree() {
+
     const tree: CreateTreeDTO = {
       location: this.addTree.value.location ?? '',
       commonName: this.addTree.value.commonName ?? '',
@@ -78,23 +100,26 @@ export class FormTreeComponent implements OnInit, OnChanges {
       neighborhood: this.addTree.value.neighborhood ?? '',
       locality: this.addTree.value.locality ?? '',
       physicalDescription: this.addTree.value.physicalDescription ?? '',
-      photo: this.addTree.value.photo ?? '',
-      state: this.addTree.value.state ?? '',
+      img: this.archivoBase64,
+      imgName:  this.filename,
+      state: this.addTree.value.state //true ? this.addTree.value.state == 'true' : false,
     };
     this.add.emit(tree);
     this.addTree.reset();
+
+    console.log('Tree a crear: ', tree);
   }
 
   updateTree() {
-    const tree: CreateTreeDTO = {
+    const tree: UpdateTreeDTO = {
       location: this.addTree.value.location ?? '',
       commonName: this.addTree.value.commonName ?? '',
       scientificName: this.addTree.value.scientificName ?? '',
       neighborhood: this.addTree.value.neighborhood ?? '',
       locality: this.addTree.value.locality ?? '',
       physicalDescription: this.addTree.value.physicalDescription ?? '',
-      photo: this.addTree.value.photo ?? '',
-      state: this.addTree.value.state ?? '',
+      //photo: this.addTree.value.photo ?? '',
+      state: this.addTree.value.state,
     };
     this.edit.emit(tree);
   }

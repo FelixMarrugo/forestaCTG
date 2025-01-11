@@ -1,5 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { AlertController, IonicModule } from '@ionic/angular';
+import {
+  AlertController,
+  IonicModule,
+  LoadingController,
+} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TreeService } from '../../services/tree.service';
 import { CreateTreeDTO } from '../../models/tree.model';
@@ -20,13 +24,20 @@ export class AddTreeComponent {
   description = 'Debe llenar todos los campos';
   constructor(
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadingController: LoadingController
   ) {}
 
   async createNewTree(tree: CreateTreeDTO) {
+    const loading = await this.loadingController.create({
+      message: 'Registrando árbol...',
+      spinner: 'lines-sharp',
+    });
+    await loading.present();
     this.treeService.create(tree).subscribe({
       next: async (response) => {
         console.log('Created: ', response);
+        await loading.dismiss();
         const successAlert = await this.alertController.create({
           header: 'Éxito',
           message: 'El árbol ha sido registrado exitosamente.',
@@ -34,7 +45,7 @@ export class AddTreeComponent {
             {
               text: 'OK',
               handler: () => {
-                this.router.navigate(['/inventario']); // Redirige a la ruta deseada
+                this.router.navigate(['/inventario']);
               },
             },
           ],
@@ -43,6 +54,7 @@ export class AddTreeComponent {
       },
       error: async (error) => {
         console.error('Error creating: ', error);
+        await loading.dismiss();
         const errorAlert = await this.alertController.create({
           header: 'Error',
           message:

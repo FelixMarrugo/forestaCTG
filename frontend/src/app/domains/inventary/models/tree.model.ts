@@ -7,9 +7,12 @@ export interface Tree {
   locality: string;
   physicalDescription: string;
   photo: string;
-  state: string;
+  state: boolean | null | undefined;
 }
 
-export interface CreateTreeDTO extends Omit<Tree, '_id'> {}
+export interface CreateTreeDTO extends Omit<Tree, '_id' | 'photo'> {
+  imgName: string;
+  img: string | ArrayBuffer | null;
+}
 
 export interface UpdateTreeDTO extends Partial<CreateTreeDTO> {}

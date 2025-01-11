@@ -37,7 +37,7 @@ export class ScheduledsStadisticsComponent {
     locality: string;
     physicalDescription: string;
     photo: string;
-    state: string;
+    state:  boolean | null | undefined;
   }[];
   async getTreesFilter(ids: string[]) {
     try {
