@@ -14,7 +14,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, LoadingController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CreateTreeDTO, Tree, UpdateTreeDTO } from '../../models/tree.model';
 import { LbService } from 'src/app/domains/shared/services/lb.service';
@@ -49,7 +49,10 @@ export class FormTreeComponent implements OnInit, OnChanges {
     state: new FormControl(true),
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private loadingController: LoadingController
+  ) {
     this.setBarrios();
     console.log('Barrios: ', this.barrios);
   }
@@ -67,7 +70,7 @@ export class FormTreeComponent implements OnInit, OnChanges {
           console.log('Archivo convertido a base64:', this.archivoBase64);
         };
         reader.readAsDataURL(file);
-        console.log('Target: ', file)
+        console.log('Target: ', file);
       }
     }
   }
@@ -92,7 +95,6 @@ export class FormTreeComponent implements OnInit, OnChanges {
   }
 
   createNewTree() {
-
     const tree: CreateTreeDTO = {
       location: this.addTree.value.location ?? '',
       commonName: this.addTree.value.commonName ?? '',
@@ -101,8 +103,8 @@ export class FormTreeComponent implements OnInit, OnChanges {
       locality: this.addTree.value.locality ?? '',
       physicalDescription: this.addTree.value.physicalDescription ?? '',
       img: this.archivoBase64,
-      imgName:  this.filename,
-      state: this.addTree.value.state //true ? this.addTree.value.state == 'true' : false,
+      imgName: this.filename,
+      state: this.addTree.value.state, //true ? this.addTree.value.state == 'true' : false,
     };
     this.add.emit(tree);
     this.addTree.reset();
@@ -140,6 +142,36 @@ export class FormTreeComponent implements OnInit, OnChanges {
         console.log('Barrio no encontrado.');
         this.localidad = '';
       }
+    }
+  }
+
+  async getGeoLocation(event: Event): Promise<void> {
+    event.preventDefault();
+    const loading = await this.loadingController.create({
+      message: 'Obteniendo ubicación...',
+      spinner: 'lines-sharp',
+    });
+    await loading.present();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.addTree.value.location = `${position.coords.latitude},${position.coords.longitude}`;
+          this.addTree.controls['location'].setValue(
+            `${position.coords.latitude},${position.coords.longitude}`
+          );
+          console.log(
+            `${position.coords.latitude},${position.coords.longitude}`
+          );
+          loading.dismiss();
+        },
+        (error) => {
+          console.error('Error obteniendo la ubicación: ', error);
+          loading.dismiss();
+        }
+      );
+    } else {
+      console.error('Geolocation no es soportado por este navegador.');
+      loading.dismiss();
     }
   }
 }
