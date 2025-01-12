@@ -14,8 +14,8 @@ export class MaintenanceService {
     @InjectModel(Maintenance.name) private maintenanceModel: Model<Maintenance>,
   ) {}
 
-  async getAll() {
-    return await this.maintenanceModel.find();
+  async getAll(filter: object) {
+    return await this.maintenanceModel.find(filter);
   }
 
   async findOne(id: string) {

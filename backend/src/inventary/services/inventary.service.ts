@@ -13,7 +13,7 @@ export class InventaryService {
     private s3Provider: S3Provider,
   ) {}
 
-  async getAll(filter: {}) {
+  async getAll(filter: object) {
     return await this.treeModel.find(filter);
   }
 

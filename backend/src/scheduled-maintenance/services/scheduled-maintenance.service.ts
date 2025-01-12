@@ -15,8 +15,8 @@ export class ScheduledMaintenanceService {
     private scheduledMaintenanceModel: Model<ScheduledMaintenance>,
   ) {}
 
-  async getAll() {
-    return await this.scheduledMaintenanceModel.find();
+  async getAll(filter: object) {
+    return await this.scheduledMaintenanceModel.find(filter);
   }
 
   async findOne(idMaintenance: string) {
@@ -40,15 +40,6 @@ export class ScheduledMaintenanceService {
     await this.scheduledMaintenanceModel.updateOne(
       { _id: new ObjectId(id) },
       { $set: body },
-    );
-    return await this.scheduledMaintenanceModel.findById(id);
-  }
-
-  // FALTA POR IMPLEMENTAR
-  async disable(id: string) {
-    await this.scheduledMaintenanceModel.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: { state: false } },
     );
     return await this.scheduledMaintenanceModel.findById(id);
   }

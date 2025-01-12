@@ -10,8 +10,8 @@ export class MaintenanceController {
   constructor(private maintenanceService: MaintenanceService) {}
 
   @Get()
-  getAll() {
-    return this.maintenanceService.getAll();
+  getAll(filter: object) {
+    return this.maintenanceService.getAll(filter);
   }
 
   @Get(':id')

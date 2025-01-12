@@ -12,8 +12,8 @@ export class ScheduledMaintenanceController {
   ) {}
 
   @Get()
-  getAll() {
-    return this.scheduledMaintenanceService.getAll();
+  getAll(filter: object) {
+    return this.scheduledMaintenanceService.getAll(filter);
   }
 
   @Get(':id')

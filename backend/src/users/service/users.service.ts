@@ -9,8 +9,8 @@ import { InjectModel } from '@nestjs/mongoose';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async getAll() {
-    return await this.userModel.find();
+  async getAll(filter: object) {
+    return await this.userModel.find(filter);
   }
 
   async findOne(id: string) {
@@ -22,14 +22,7 @@ export class UsersService {
   }
 
   async create(body: CreateUserDto) {
-    const newUser = await this.userModel.insertMany([
-      {
-        username: 'usuario1',
-        email: 'usuario1@example.com',
-        avatar: 'https://example.com/avatar1.jpg',
-        password: 'password123',
-      },
-    ]);
+    const newUser = await this.userModel.insertMany([body]);
     return newUser;
   }
 

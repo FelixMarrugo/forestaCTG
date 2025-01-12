@@ -15,8 +15,8 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Get()
-  getAll() {
-    return this.userService.getAll();
+  getAll(filter: object) {
+    return this.userService.getAll(filter);
   }
 
   @Post()

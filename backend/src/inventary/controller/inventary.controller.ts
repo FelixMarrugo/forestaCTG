@@ -7,17 +7,17 @@ export class InventaryController {
   constructor(private inventaryServices: InventaryService) {}
 
   @Get()
-  async getAll() {
-    return await this.inventaryServices.getAll({});
-  }
-
-  @Post('filter/')
-  async getTreesWithFilter(@Body() filter) {
+  async getAll(filter: object) {
     return await this.inventaryServices.getAll(filter);
   }
 
+  @Post('filter/')
+  async getTreesWithFilter(@Body() filter: object) {
+    return await this.getAll(filter);
+  }
+
   @Post('filter/trees')
-  async getTreesFilter(@Body() filter) {
+  async getTreesFilter(@Body() filter: { id: [string] }) {
     return await this.inventaryServices.getFilterTrees(filter);
   }
 
