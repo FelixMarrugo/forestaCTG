@@ -10,7 +10,7 @@ export class User extends Document {
   email: string;
 
   @Prop()
-  avatar: string;
+  status: boolean;
 
   @Prop({ required: true })
   password: string;
