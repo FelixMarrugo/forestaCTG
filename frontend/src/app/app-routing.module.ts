@@ -1,29 +1,40 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './domains/shared/components/layout/layout.component';
-import {UsersComponent} from './domains/users/page/users/users.component';
+import { UsersComponent } from './domains/users/page/users/users.component';
 import { NotFoundComponent } from './domains/info/page/not-found/not-found.component';
 import { ListTreeComponent } from './domains/inventary/page/list-tree/list-tree.component';
 import { AddTreeComponent } from './domains/inventary/page/add-tree/add-tree.component';
 import { EditComponent } from './domains/inventary/page/edit/edit.component';
 import { MaintenanceComponent } from './domains/maintenance/page/maintenance/maintenance.component';
 import { DetailMaintenanceComponent } from './domains/maintenance/components/detail-maintenance/detail-maintenance.component';
+import { LoginComponent } from './domains/login/login.component';
 import StadisticComponent from './domains/stadistics/page/stadistic/stadistic.component';
+import { logIn } from 'ionicons/icons';
 
 const routes: Routes = [
-
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: '',
     component: LayoutComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         redirectTo: 'home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+        loadChildren: () =>
+          import('./home/home.module').then((m) => m.HomePageModule),
       },
       {
         path: 'users',
@@ -52,19 +63,19 @@ const routes: Routes = [
       {
         path: 'stadistic',
         component: StadisticComponent,
-      }
-    ]
+      },
+    ],
   },
   {
     path: '**',
     component: NotFoundComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
