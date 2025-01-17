@@ -1,14 +1,23 @@
-
 <app-menu></app-menu>
 
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
+
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>Menu</ion-title>
+      <ion-button slot="end">
+        <button (click)="logout()">Cerrar sesión<ion-icon name="log-out" id="salir"></ion-icon></button>
+      </ion-button>
     </ion-toolbar>
+
+    <ion-content class="ion-padding" style="display: none;">
+      <ion-menu-toggle>
+        <ion-button>Click to close the menu</ion-button>
+      </ion-menu-toggle>
+    </ion-content>
   </ion-header>
 
   <ion-content>
@@ -16,5 +25,3 @@
   </ion-content>
   <app-footer></app-footer>
 </div>
-
-

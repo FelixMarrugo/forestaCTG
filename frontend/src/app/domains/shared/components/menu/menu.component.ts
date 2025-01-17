@@ -1,9 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLinkWithHref } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { addIcons } from 'ionicons';
-import { library, playCircle, radio, search } from 'ionicons/icons';
-import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-menu',

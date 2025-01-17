@@ -6,6 +6,7 @@ import { AddMaintenanceComponent } from '../../components/add-maintenance/add-ma
 import { CardMaintenanceComponent } from '../../components/card-maintenance/card-maintenance.component';
 import { Maintenance } from '../../models/maintenance.model';
 import { MaintenanceService } from '../../services/maintenance.service';
+import { SessionService } from 'src/app/domains/shared/services/session.service';
 
 @Component({
   selector: 'app-maintenance',
@@ -20,11 +21,11 @@ import { MaintenanceService } from '../../services/maintenance.service';
   styleUrls: ['./maintenance.component.scss'],
 })
 export class MaintenanceComponent implements OnInit {
-  constructor() {}
-
+  constructor(private sessionService: SessionService) {}
   private maintenanceService = inject(MaintenanceService);
   maintenance = signal<Maintenance[]>([]);
     ngOnInit() {
+      this.sessionService.checkSession();
       this.get();
     }
 

@@ -13,6 +13,7 @@ import {
   ScheduledMaintenance,
 } from '../../models/scheduledMaintenance.model';
 import { ViewScheduledComponent } from '../view-scheduled/view-scheduled.component';
+import { SessionService } from 'src/app/domains/shared/services/session.service';
 
 @Component({
   selector: 'app-detail-maintenance',
@@ -26,7 +27,7 @@ export class DetailMaintenanceComponent implements OnInit, OnChanges {
   private maintenanceService = inject(MaintenanceService);
 
   id!: string;
-  constructor(
+  constructor(private sessionService: SessionService,
     private route: ActivatedRoute,
     private router: Router,
     private alertController: AlertController
@@ -50,6 +51,7 @@ export class DetailMaintenanceComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.sessionService.checkSession();
     this.id = this.route.snapshot.paramMap.get('id') ?? ''; // Now you can use treeId for your request and edit the tree//
     +{
       conversationId: '30e4fc25-5526-4d9c-97b1-b5f800250085',

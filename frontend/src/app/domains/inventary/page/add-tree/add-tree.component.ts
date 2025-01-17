@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   AlertController,
   IonicModule,
@@ -9,6 +9,7 @@ import { TreeService } from '../../services/tree.service';
 import { CreateTreeDTO } from '../../models/tree.model';
 import { FormTreeComponent } from '../../components/form-tree/form-tree.component';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/domains/shared/services/session.service';
 
 @Component({
   selector: 'app-add-tree',
@@ -17,12 +18,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-tree.component.scss'],
   imports: [IonicModule, CommonModule, FormTreeComponent],
 })
-export class AddTreeComponent {
+export class AddTreeComponent implements OnInit {
   private treeService = inject(TreeService);
+
+  ngOnInit() {
+    this.sessionService.checkSession();
+  }
 
   title = 'ADD TREE';
   description = 'Debe llenar todos los campos';
-  constructor(
+  constructor(private sessionService: SessionService,
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController

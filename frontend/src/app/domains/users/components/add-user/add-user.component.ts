@@ -9,6 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/domains/shared/services/session.service';
 
 @Component({
   selector: 'app-add-user',
@@ -17,8 +18,13 @@ import { Router } from '@angular/router';
   imports: [CommonModule, IonicModule, ReactiveFormsModule],
   styleUrls: ['./add-user.component.scss'],
 })
-export class AddUserComponent {
+export class AddUserComponent implements OnInit {
+
+  ngOnInit() {
+    this.sessionService.checkSession();
+  }
   constructor(
+    private sessionService: SessionService,
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController
@@ -31,6 +37,7 @@ export class AddUserComponent {
   });
 
   async createUser() {
+    this.addUser.value.email = this.addUser.value.email?.toLowerCase();
     const loading = await this.loadingController.create({
       message: 'Registrando usuario...',
       spinner: 'lines-sharp',

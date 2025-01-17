@@ -24,4 +24,8 @@ export class UsersService {
   create(user: CreateUserDTO){
     return this.http.post<CreateUserDTO>(`${this.apiUrl}`+this.complementUrl, user);
   }
+
+  getUser(correo:string){
+    return this.http.get<User[]>(`${this.apiUrl}`+this.complementUrl+'/'+correo);
+  }
 }

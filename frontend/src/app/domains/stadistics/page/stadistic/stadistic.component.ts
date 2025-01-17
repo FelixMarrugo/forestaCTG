@@ -14,6 +14,7 @@ import { colorFill } from 'ionicons/icons';
 import { ScheduledMaintenance } from 'src/app/domains/maintenance/models/scheduledMaintenance.model';
 import { LbService } from 'src/app/domains/shared/services/lb.service';
 import { MenuService } from 'src/app/domains/shared/services/menu.service';
+import { SessionService } from 'src/app/domains/shared/services/session.service';
 @Component({
   selector: 'app-stadistic',
   standalone: true,
@@ -28,7 +29,7 @@ import { MenuService } from 'src/app/domains/shared/services/menu.service';
   styleUrls: ['./stadistic.component.scss'],
 })
 export default class StadisticComponent implements OnInit {
-  constructor() {
+  constructor(private sessionService: SessionService) {
     this.menuService.set(this.title)
   }
   title = 'Estadisticas';
@@ -46,6 +47,7 @@ export default class StadisticComponent implements OnInit {
   private menuService = inject(MenuService);
 
   async ngOnInit() {
+    this.sessionService.checkSession();
     await this.getTree();
     //console.log('GetTree called');
     await this.getMaintenance();

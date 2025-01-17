@@ -4,9 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { MenuComponent } from './../menu/menu.component';
-import {FooterComponent} from './../footer/footer.component';
+import { FooterComponent } from './../footer/footer.component';
 import { MenuService } from '../../services/menu.service';
-
+import { SessionService } from '../../services/session.service';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -15,8 +15,11 @@ import { MenuService } from '../../services/menu.service';
   imports: [IonicModule, MenuComponent, FooterComponent, RouterModule],
 })
 export class LayoutComponent {
-  constructor() {}
-
   private menuService = inject(MenuService);
   title = this.menuService.get();
+
+  constructor(private sessionService: SessionService) {}
+  logout() {
+    this.sessionService.clearSession();
+  }
 }

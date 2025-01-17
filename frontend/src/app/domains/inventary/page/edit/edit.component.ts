@@ -7,6 +7,7 @@ import { FormTreeComponent } from '../../components/form-tree/form-tree.componen
 import { Tree, UpdateTreeDTO } from '../../models/tree.model';
 import { TreeService } from '../../services/tree.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SessionService } from 'src/app/domains/shared/services/session.service';
 
 @Component({
   selector: 'app-edit',
@@ -23,12 +24,14 @@ export class EditComponent implements OnInit {
   private treeService = inject(TreeService);
 
   constructor(
+    private sessionService: SessionService,
     private route: ActivatedRoute,
     private router: Router,
     private alertController: AlertController
   ) {}
 
   ngOnInit(): void {
+    this.sessionService.checkSession();
     this.treeId = this.route.snapshot.paramMap.get('id') ?? ''; // Now you can use treeId for your request and edit the tree//
     +{
       conversationId: '30e4fc25-5526-4d9c-97b1-b5f800250085',
