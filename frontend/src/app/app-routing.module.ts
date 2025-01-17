@@ -11,6 +11,7 @@ import { DetailMaintenanceComponent } from './domains/maintenance/components/det
 import { LoginComponent } from './domains/login/login.component';
 import StadisticComponent from './domains/stadistics/page/stadistic/stadistic.component';
 import { logIn } from 'ionicons/icons';
+import { AddUserComponent } from './domains/users/components/add-user/add-user.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path: 'stadistic',
         component: StadisticComponent,
+      },
+      {
+        path: 'addusers',
+        component: AddUserComponent,
       },
     ],
   },
