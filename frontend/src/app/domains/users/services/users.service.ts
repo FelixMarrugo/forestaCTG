@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { User } from '../models/user.model';
+import { CreateUserDTO, User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UsersService {
+  createUser(user: { status: boolean; name?: string | null | undefined; email?: string | null | undefined; password?: string | null | undefined; }) {
+    throw new Error('Method not implemented.');
+  }
 
   private http = inject(HttpClient);
   constructor() { }
@@ -17,5 +20,8 @@ export class UsersService {
     //console.log(this.apiUrl);
     return this.http.get<User[]>(`${this.apiUrl}`+this.complementUrl);
     //return this.http.get<User[]>('http://localhost:8100/users');
+  }
+  create(user: CreateUserDTO){
+    return this.http.post<CreateUserDTO>(`${this.apiUrl}`+this.complementUrl, user);
   }
 }

@@ -9,6 +9,7 @@ import { EditComponent } from './domains/inventary/page/edit/edit.component';
 import { MaintenanceComponent } from './domains/maintenance/page/maintenance/maintenance.component';
 import { DetailMaintenanceComponent } from './domains/maintenance/components/detail-maintenance/detail-maintenance.component';
 import StadisticComponent from './domains/stadistics/page/stadistic/stadistic.component';
+import { AddUserComponent } from './domains/users/components/add-user/add-user.component';
 
 const routes: Routes = [
 
@@ -52,6 +53,10 @@ const routes: Routes = [
       {
         path: 'stadistic',
         component: StadisticComponent,
+      },
+      {
+        path: 'addusers',
+        component: AddUserComponent,
       }
     ]
   },
