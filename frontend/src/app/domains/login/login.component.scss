@@ -1,0 +1,53 @@
+ion-content {
+  position: relative;
+}
+
+img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: blur(5px) opacity(0.5);
+  animation: 10s infinite alternate ease-in-out zoom;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+ion-card {
+  position: relative;
+  width: 40%;
+  margin: auto;
+  border-radius: 0px 0px 20px 20px;
+}
+
+input,
+ion-button {
+  border-radius: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  ion-card {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+  ion-card {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1200px) {
+  ion-card {
+    width: 50%;
+  }
+}
