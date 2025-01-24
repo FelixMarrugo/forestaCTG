@@ -59,7 +59,6 @@ export class LoginComponent {
       this.navCtrl.navigateRoot('/login');
     }
   }
-
   async filterByEmail(email: string): Promise<any> {
     try {
       const response = await this.loginService.getUser(email).toPromise();
@@ -70,7 +69,6 @@ export class LoginComponent {
       return undefined;
     }
   }
-
   async showWelcomeAlert() {
     const alert = await this.alertController.create({
       header: '¡Bienvenido!',

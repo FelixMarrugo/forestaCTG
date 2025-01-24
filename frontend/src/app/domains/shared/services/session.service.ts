@@ -11,7 +11,6 @@ export class SessionService {
       this.navCtrl.navigateRoot('/login');
     }
   }
-
   clearSession() {
     sessionStorage.removeItem('userId');
     this.navCtrl.navigateRoot('/login');
