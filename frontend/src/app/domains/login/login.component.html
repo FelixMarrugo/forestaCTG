@@ -1,21 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-  <img src="./../../../assets/fondoInicio/pexels-valiphotos-589802.jpg" alt="">
+  <img
+    src="./../../../assets/fondoInicio/pexels-valiphotos-589802.jpg"
+    alt=""
+  />
   <ion-card>
     <ion-card-header>
       <ion-card-title>Inicio de sesión</ion-card-title>
       <ion-card-subtitle>Llene todos los campos</ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content >
+    <ion-card-content>
       <form (ngSubmit)="login()">
         <ion-item>
-          <div class="relative z-0 w-full mb-5 group" style="margin-top: 25px;">
+          <div class="relative z-0 w-full mb-5 group" style="margin-top: 25px">
             <input
               [(ngModel)]="email"
               type="email"
