@@ -25,6 +25,16 @@ img {
   }
 }
 
+ion-card-header {
+  margin-top: 7%;
+  text-align: center;
+}
+
+ion-card ion-card-title{
+  font-size: 30px;
+  font-weight: bold;
+}
+
 ion-card {
   position: relative;
   width: 40%;
@@ -43,8 +53,7 @@ ion-button {
 
 @media screen and (max-width: 600px) {
   ion-card {
-    width: 100%;
-    height: 100%;
+    width: 80%;
   }
 }
 
