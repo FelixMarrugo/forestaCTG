@@ -84,7 +84,7 @@ export class DetailMaintenanceComponent implements OnInit, OnChanges {
         console.log('Created: ', response);
         const successAlert = await this.alertController.create({
           header: 'Éxito',
-          message: 'El mantenimiento ha sido programado exitosamente.',
+          message: 'El mantenimiento ha sido documentado exitosamente.',
           buttons: [
             {
               text: 'OK',

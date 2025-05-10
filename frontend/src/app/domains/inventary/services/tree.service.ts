@@ -34,12 +34,12 @@ export class TreeService {
 
   update(id: string, dto: UpdateTreeDTO) {
     return this.http.put<UpdateTreeDTO>(
-      `${this.apiUrl}${this.complementUrl}/${id}`,
+      `${this.apiUrl}${this.complementUrl}${id}`,
       dto
     );
   }
 
   getOne(id: string) {
-    return this.http.get<Tree>(`${this.apiUrl}${this.complementUrl}/${id}`);
+    return this.http.get<Tree>(`${this.apiUrl}${this.complementUrl}${id}`);
   }
 }

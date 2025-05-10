@@ -42,11 +42,12 @@ export class EditComponent implements OnInit {
   }
 
   getTreeId() {
-    console.log(this.tree);
+
     this.treeService.getOne(this.treeId).subscribe({
       next: (response) => {
         console.log('Tree: ', response);
         this.tree = response;
+        console.log(this.tree);
       },
       error: (error) => {
         console.error('Error fetching trees:', error);
@@ -54,12 +55,6 @@ export class EditComponent implements OnInit {
     });
   }
 
-  /*updateTree(tree: UpdateTreeDTO) {
-    console.log('tree update: ', tree);
-    this.treeService.update(this.treeId, tree).subscribe((response) => {
-      console.log('Updated: ', response);
-    });
-  }*/
   async updateTree(tree: UpdateTreeDTO) {
     console.log('tree update: ', tree);
     this.treeService.update(this.treeId, tree).subscribe({
