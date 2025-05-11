@@ -1,14 +1,21 @@
 <ion-grid>
-  <ion-row>
+   <ion-row>
     <ion-col>
-      <ion-item>
-        <ion-label>
-          <h1>Estadisticas</h1>
-          <p>Este apartado esta diseñado para la generación de estadisticas sobre el recurso arboreo</p>
-        </ion-label>
-      </ion-item>
+      <app-general></app-general>
     </ion-col>
   </ion-row>
+
+<ion-row>
+  <ion-col size="12">
+    <ion-card class="shadow-md rounded-lg p-4">
+      <ion-card-header>
+        <ion-card-title class="font-bold" style="font-size: 25px; text-align: center;">Graficas</ion-card-title>
+      </ion-card-header>
+
+    </ion-card>
+  </ion-col>
+</ion-row>
+
   <ion-row>
     <ion-col>
       <app-tree-stadistics [treeXlocality]="treeXlocalities"></app-tree-stadistics>
@@ -26,4 +33,6 @@
       <app-scheduleds-stadistics [Scheduled]="schedules()"></app-scheduleds-stadistics>
     </ion-col>
   </ion-row>
+
+
 </ion-grid>

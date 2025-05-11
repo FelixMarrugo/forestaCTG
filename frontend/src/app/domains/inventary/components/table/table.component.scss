@@ -10,12 +10,12 @@
   text-align: center; /* Asegurar que el texto esté centrado */
 }
 
-ion-card{
-  background-color:#0096BA;
-  --color: #fff;
-}
-
 .addTree:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.card-table{
+  box-shadow: 2px 2px 5px 0 rgba(6, 212, 57, 0.29), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 

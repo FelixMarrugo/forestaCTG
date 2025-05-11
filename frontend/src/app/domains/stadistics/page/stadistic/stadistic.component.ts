@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
 
 import { TreeStadisticsComponent } from '../../components/tree-stadistics/tree-stadistics.component';
 import { MaintenanceStaditicsComponent } from '../../components/maintenance-staditics/maintenance-staditics.component';
@@ -10,11 +9,12 @@ import { TreeService } from 'src/app/domains/inventary/services/tree.service';
 import { Tree } from 'src/app/domains/inventary/models/tree.model';
 import { Maintenance } from 'src/app/domains/maintenance/models/maintenance.model';
 import { MaintenanceService } from 'src/app/domains/maintenance/services/maintenance.service';
-import { colorFill } from 'ionicons/icons';
 import { ScheduledMaintenance } from 'src/app/domains/maintenance/models/scheduledMaintenance.model';
 import { LbService } from 'src/app/domains/shared/services/lb.service';
 import { MenuService } from 'src/app/domains/shared/services/menu.service';
 import { SessionService } from 'src/app/domains/shared/services/session.service';
+import { GeneralComponent } from '../../components/general/general.component';
+
 @Component({
   selector: 'app-stadistic',
   standalone: true,
@@ -24,6 +24,7 @@ import { SessionService } from 'src/app/domains/shared/services/session.service'
     TreeStadisticsComponent,
     MaintenanceStaditicsComponent,
     ScheduledsStadisticsComponent,
+    GeneralComponent
   ],
   templateUrl: './stadistic.component.html',
   styleUrls: ['./stadistic.component.scss'],
@@ -40,7 +41,7 @@ export default class StadisticComponent implements OnInit {
   private maintenanceService = inject(MaintenanceService);
   maintenance = signal<Maintenance[]>([]);
 
-  schedules = signal<ScheduledMaintenance[] | any>([]) ;
+  schedules = signal<ScheduledMaintenance[] | any>([]);
   localities: any[] = [];
   treeXlocalities: number[] = [];
 
@@ -82,13 +83,13 @@ export default class StadisticComponent implements OnInit {
   // }
   async getScheduleds() {
     try {
-        const response = await this.maintenanceService.getScheduledAll().toPromise();
-        console.log('Schedules: ', response);
-        this.schedules.set(response);
+      const response = await this.maintenanceService.getScheduledAll().toPromise();
+      console.log('Schedules: ', response);
+      this.schedules.set(response);
     } catch (error) {
-        console.error('Error creating: ', error);
+      console.error('Error creating: ', error);
     }
-}
+  }
 
   async filterTree() {
     this.lbService.LB.forEach((item) => {
