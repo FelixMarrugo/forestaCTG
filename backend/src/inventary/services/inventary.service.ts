@@ -54,6 +54,14 @@ export class InventaryService {
     return await this.treeModel.findById(id);
   }
 
+  async enable(id: string) {
+    await this.treeModel.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { state: true } },
+    );
+    return await this.treeModel.findById(id);
+  }
+
   async getFilterTrees(filter: { id: [string] }) {
     const arr = filter.id.map((elem) => new ObjectId(elem));
 

@@ -40,4 +40,9 @@ export class InventaryController {
   async disable(@Param('id') id: string) {
     return await this.inventaryServices.disable(id);
   }
+
+  @Put('enable/:id')
+  async enable(@Param('id') id: string) {
+    return await this.inventaryServices.enable(id);
+  }
 }

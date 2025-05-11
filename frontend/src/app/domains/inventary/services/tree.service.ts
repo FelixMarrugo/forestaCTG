@@ -17,6 +17,7 @@ export class TreeService {
     console.log(`Url: ${this.apiUrl}${this.complementUrl}`);
     return this.http.get<Tree[]>(`${this.apiUrl}` + this.complementUrl);
   }
+
   getTreesFilter(ids: string[]): Observable<any> {
     const url = `${this.apiUrl}${this.complementUrl}filter/trees`;
     console.log(`Url: ${url}`);
@@ -34,7 +35,14 @@ export class TreeService {
 
   update(id: string, dto: UpdateTreeDTO) {
     return this.http.put<UpdateTreeDTO>(
-      `${this.apiUrl}${this.complementUrl}${id}`,
+      `${this.apiUrl}${this.complementUrl}disable/${id}`,
+      dto
+    );
+  }
+
+  enable(id: string, dto: UpdateTreeDTO) {
+    return this.http.put<UpdateTreeDTO>(
+      `${this.apiUrl}${this.complementUrl}enable/${id}`,
       dto
     );
   }
