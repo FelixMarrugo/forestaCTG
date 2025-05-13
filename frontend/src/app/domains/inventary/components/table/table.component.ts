@@ -168,7 +168,7 @@ export class TableComponent implements OnInit, AfterViewInit {
               state: false,
             };
 
-            this.treeService.update(tree._id, dto).subscribe({
+            this.treeService.desable(tree._id, dto).subscribe({
               next: async (response) => {
 
                 tree.state = false;

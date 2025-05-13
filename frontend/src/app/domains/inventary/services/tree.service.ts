@@ -35,6 +35,13 @@ export class TreeService {
 
   update(id: string, dto: UpdateTreeDTO) {
     return this.http.put<UpdateTreeDTO>(
+      `${this.apiUrl}${this.complementUrl}${id}`,
+      dto
+    );
+  }
+
+    desable(id: string, dto: UpdateTreeDTO) {
+    return this.http.put<UpdateTreeDTO>(
       `${this.apiUrl}${this.complementUrl}disable/${id}`,
       dto
     );
